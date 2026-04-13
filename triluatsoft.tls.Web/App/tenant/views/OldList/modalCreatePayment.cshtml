@@ -1,0 +1,110 @@
+﻿<div>
+    <form name="form" role="form" class="form-validation">
+        <div class="panel-group">
+            <div class="modal-header">
+                <button type="button" class="close" ng-click="vm.cancel()">&times;</button>
+                <h3 style="color:#0285bd">@L("CreatePayment")</h3>
+            </div>
+            <div class="modal-body">
+                <div class="row" style="margin-bottom:5px">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-4" style="width:150px">
+                                @L("InvoiceRef")
+                            </label>
+                            <div class="col-md-4">
+                                <input disabled type="text" class="form-control input-large" value="{{vm.item.invoiceCode}}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-bottom:5px">
+                    <div class="col-md-6">
+                        <div class="form-group" ng-class="{ 'has-error' : form.paymentCode.$invalid}">
+                            <label class="control-label col-md-4" style="width:150px">
+                                @L("PaymentCode")
+                            </label>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control input-large" ng-model="vm.newitem.paymentCode" required name="paymentCode" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row" style="margin-bottom:5px">
+                    <div class="col-md-6">
+                        <div class="form-group" ng-class="{ 'has-error' : form.paymentMethod.$invalid}">
+                            <label class="control-label col-md-4" style="width:150px">
+                                @L("PaymentMethod")
+                            </label>
+                            <div class="col-md-4">
+                                <select class="form-control input-large" ng-model="vm.newitem.paymentMethod" required name="paymentMethod"  ng-init="vm.newitem.paymentMethod = 'B'">
+                                <option value="C">Cash</option>
+                                <option value="B">TT</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row" style="margin-bottom:5px">
+                    <div class="col-md-6">
+                        <div class="form-group" ng-class="{ 'has-error' : form.refCode.$invalid}">
+                            <label class="control-label col-md-4" style="width:150px">
+                                @L("RefCode")
+                            </label>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control input-large" ng-model="vm.newitem.refCode" name="refCode" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row" style="margin-bottom:5px">
+                    <div class="col-md-6">
+                        <div class="form-group" ng-class="{ 'has-error' : form.paymentAmount.$invalid}">
+                            <label class="control-label col-md-4" style="width:150px">
+                                @L("PaymentAmount")
+                            </label>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control input-large text-right" ng-model="vm.newitem.paymentAMT" required sg-number-input name="paymentAmount" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row" style="margin-bottom:5px">
+                    <div class="col-md-6">
+                        <div class="form-group" ng-class="{ 'has-error' : form.paymentDate.$invalid}">
+                            <label class="control-label col-md-4" style="width:150px">
+                                @L("PaymentDate")
+                            </label>
+                            <div class="col-md-4">
+                                <input type="text" required class="form-control input-large" name="paymentDate" id="paymentDate" ng-model="vm.paymentDate">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row" style="margin-bottom:5px">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-4" style="width:150px">
+                                @L("Remark")
+                            </label>
+                            <div class="col-md-4">
+                                <textarea type="text" class="form-control input-large" ng-model="vm.newitem.remark" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button ng-disabled="vm.saving" type="button" class="btn btn-default" ng-click="vm.cancel()">@L("Cancel")</button>
+            <button type="submit" class="btn btn-primary blue" ng-click="vm.save()" ng-disabled="vm.saving || form.$invalid"><i class="fa fa-save"></i> <span>@L("Save")</span></button>
+
+        </div>
+    </form>
+</div>

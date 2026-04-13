@@ -1,0 +1,136 @@
+<div ng-controller="tenant.views.OldList.updateClaimProcess as vm">
+    <div class="row margin-bottom-5">
+        <div class="col-xs-6">
+            <div class="page-head">
+                <div class="page-title">
+                    <h1>
+                      Update Claim Process
+                    </h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="portlet light margin-bottom-0">
+        <div class="portlet-body">
+            <form action="#" class="form-horizontal" name="claimForm" novalidate>
+                <div class="form-body">
+                    <div class="row">                        
+                        <div class="col-lg-6 col-md-6 col-sm-6 form-horizontal">
+                            <div class="form-group" ng-class="{ 'has-error' : claimForm.claimID.$invalid}">
+                                <label class="control-label col-lg-4">@L("ClaimRef")</label>
+                                <div class="col-lg-8">
+                                    <select class="form-control" name="claimID" required
+                                            ng-model="vm.item.claimId" ng-options="x for x in vm.item.claims" ng-change="vm.selectClaimId()"></select>
+                                </div>
+                            </div>                            
+                        </div>                        
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="portlet-body">
+            <br />
+            <table class="table table-striped table-bordered table-hover no-footer" busy-if="vm.loading" data-click-to-select="true">
+                <thead role="row">
+                    <tr>
+                        <th class="text-center col-md-1">@L("ClaimRef")</th>
+                        <th class="text-center col-md-3">@L("Status")</th>
+                        <th class="text-center col-md-4">@L("EventAction")</th>
+                        <th class="text-center">@L("ConfirmAction")</th>                        
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="claimp in vm.item.claimps">
+                        <td class="text-center">{{claimp.claimID}}</td>
+                        <td class="text-center">{{claimp.lastStatus}}</td>                        
+                        <td class="text-center">
+                            <button ng-click="vm.updateClaim(claimp.id, 16)" class="btn btn-icon-only" href="javascript:;" title="The first site survey is completed" ng-disabled="claimp.nextAction != 16">
+                                <i class="icon-check"></i>
+                            </button>
+                            <button ng-click="vm.updateClaim(claimp.id, 17)" class="btn btn-icon-only " href="javascript:;" title="The site surveys are completed" ng-disabled="claimp.nextAction != 17">
+                                <i class="icon-check"></i>
+                            </button>
+                            <button ng-click="vm.updateClaim(claimp.id, 18)" class="btn btn-icon-only " href="javascript:;" title="Request PRE report in Language 2" ng-disabled="claimp.enPREL2Request == false">
+                                <i class="icon-check"></i>
+                            </button>
+                            <button ng-click="vm.updateClaim(claimp.id, 19)" class="btn btn-icon-only " href="javascript:;" title="Insurer agrees to issue soft copy of PRE" ng-disabled="claimp.nextAction != 19">
+                                <i class="icon-check"></i>
+                            </button>
+                            <button ng-click="vm.updateClaim(claimp.id, 20)" class="btn btn-icon-only " href="javascript:;" title="Insured’s request for payment on account/Insurer’s instructions on writing Interim report" ng-disabled="claimp.nextAction != 20">
+                                <i class="icon-check"></i>
+                            </button>
+                            <button ng-click="vm.updateClaim(claimp.id, 21)" class="btn btn-icon-only " href="javascript:;" title="Request INT report in Language 2" ng-disabled="claimp.enINTL2Request == false">
+                                <i class="icon-check"></i>
+                            </button>
+                            <br /><br />
+                            <button ng-click="vm.updateClaim(claimp.id, 22)" class="btn btn-icon-only " href="javascript:;" title="Insurer agrees to issue soft copy of INT" ng-disabled="claimp.nextAction != 22">
+                                <i class="icon-check"></i>
+                            </button>
+                            <button ng-click="vm.updateClaim(claimp.id, 23)" class="btn btn-icon-only " href="javascript:;" title="Insured fully provides claim documentation" ng-disabled="claimp.nextAction != 23">
+                                <i class="icon-check"></i>
+                            </button>
+                            <button ng-click="vm.updateClaim(claimp.id, 24)" class="btn btn-icon-only " href="javascript:;" title="Request FIN report in Language 2" ng-disabled="claimp.enFINL2Request == false">
+                                <i class="icon-check"></i>
+                            </button>
+                            <button ng-click="vm.updateClaim(claimp.id, 25)" class="btn btn-icon-only " href="javascript:;" title="Insurer agrees to issue soft copy of FIN" ng-disabled="claimp.nextAction != 25">
+                                <i class="icon-check"></i>
+                            </button>
+                        </td>
+                        <td class="text-center">
+                            <button ng-click="vm.updateClaim(claimp.id, 1)" class="btn btn-icon-only" href="javascript:;" title="Send Acknowledgement" ng-disabled="claimp.nextAction != 1">
+                                <i class="icon-check"></i>
+                            </button>
+                            <button ng-click="vm.updateClaim(claimp.id, 2)" class="btn btn-icon-only " href="javascript:;" title="Send Meeting Note"ng-disabled="claimp.nextAction != 2">
+                                <i class="icon-check"></i>
+                            </button>
+                            <button ng-click="vm.updateClaim(claimp.id, 3)" class="btn btn-icon-only " href="javascript:;" title="Send ILA" ng-disabled="claimp.nextAction != 3">
+                                <i class="icon-check"></i>
+                            </button>
+                            <button ng-click="vm.updateClaim(claimp.id, 15)" class="btn btn-icon-only " href="javascript:;" title="Send Document Request" ng-disabled="claimp.waitDocRequest == false">
+                                <i class="icon-check"></i>
+                            </button>
+                            <button ng-click="vm.updateClaim(claimp.id, 30)" class="btn btn-icon-only " href="javascript:;" title="Send FFR" ng-disabled="claimp.nextAction != 4">
+                                <i class="icon-check"></i>
+                            </button>
+                            <button ng-click="vm.updateClaim(claimp.id, 4)" class="btn btn-icon-only " href="javascript:;" title="Send PRE L1" ng-disabled="claimp.nextAction != 4">
+                                <i class="icon-check"></i>
+                            </button>
+                            <br /><br />
+                            <button ng-click="vm.updateClaim(claimp.id, 5)" class="btn btn-icon-only " href="javascript:;" title="Send PRE L2" ng-disabled="claimp.nextAction != 5">
+                                <i class="icon-check"></i>
+                            </button>                            
+                            <button ng-click="vm.updateClaim(claimp.id, 6)" class="btn btn-icon-only " href="javascript:;" title="Send PRE hard copy" ng-disabled="claimp.nextAction != 6">
+                                <i class="icon-check"></i>
+                            </button>                            
+                            <button ng-click="vm.updateClaim(claimp.id, 7)" class="btn btn-icon-only " href="javascript:;" title="Send INT L1" ng-disabled="claimp.nextAction != 7">
+                                <i class="icon-check"></i>
+                            </button>
+                            <button ng-click="vm.updateClaim(claimp.id, 8)" class="btn btn-icon-only " href="javascript:;" title="Send INT L2" ng-disabled="claimp.nextAction != 8">
+                                <i class="icon-check"></i>
+                            </button>
+                            <button ng-click="vm.updateClaim(claimp.id, 9)" class="btn btn-icon-only " href="javascript:;" title="Send INT hard copy" ng-disabled="claimp.nextAction != 9">
+                                <i class="icon-check"></i>
+                            </button>
+                            <button ng-click="vm.updateClaim(claimp.id, 10)" class="btn btn-icon-only " href="javascript:;" title="Send FIN L1"  ng-disabled="claimp.nextAction != 10">
+                                <i class="icon-check"></i>
+                            </button>
+                            <br /><br />
+                            <button ng-click="vm.updateClaim(claimp.id, 11)" class="btn btn-icon-only " href="javascript:;" title="Send FIN L2" ng-disabled="claimp.nextAction != 11">
+                                <i class="icon-check"></i>
+                            </button>                            
+                            <button ng-click="vm.updateClaim(claimp.id, 12)" class="btn btn-icon-only " href="javascript:;" title="Send FIN hard copy" ng-disabled="claimp.nextAction != 12">
+                                <i class="icon-check"></i>
+                            </button>                            
+                            <button ng-click="vm.updateClaim(claimp.id, 13)" class="btn btn-icon-only " href="javascript:;" title="Submit"  ng-disabled="claimp.nextAction != 13">
+                                <i class="icon-check"></i>
+                            </button>                            
+                        </td>                        
+                    </tr>
+                    <tr ng-show="!vm.item.claimps || vm.item.claimps.length == 0">
+                        <td colspan="15">@L("NoRecords")</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,70 @@
+﻿<div>
+    <form name="form" role="form" class="form-validation">
+        <div class="panel-group">
+            <div class="modal-header">
+                <h4 class="modal-title">@L("ClaimFoldersFiles")</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row" style="margin-bottom:5px">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-4">
+                                @L("Search")
+                            </label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" ng-model="vm.searchdata.claimID">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-6">
+                                <button ng-click="vm.getAll()" type="submit" class="btn btn-primary blue"><span>@L("Search")</span></button>
+                                <button type="submit" ng-click="vm.all()" class="btn btn-primary"><span>@L("All")</span></button>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <div class="panel-title" style="color:blue;font-size:20px">@L("Result")</div>
+                        </div>
+                        <table class="table table-striped table-bordered table-hover table-checkable dataTable no-footer" cellspacing="0">
+                            <thead role="row">
+                                <tr>
+                                    <th class="text-center" style="color:blue; font:caption">@L("ClaimRef")</th>
+                                    <th class="text-center" style="color:blue; font:caption">@L("Folder")</th>
+                                    <th class="text-center" style="color:blue; font:caption">@L("Detail")</th>
+                                    <th class="text-center" style="color:blue; font:caption">@L("Permissions")</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="cause in vm.list">
+                                    <td class="text-center">{{cause.fName}}</td>
+                                    <td class="text-left">{{cause.fPath}}</td>
+                                    <td class="text-left"><a ng-click="vm.openModalClaimFolder(cause.fPath)">Browse</a></td>
+                                    <td class="text-left">{{cause.fSecurity}}</td>
+                                    
+                                </tr>
+                                <tr ng-show="vm.list.length == 0">
+                                    <td colspan="15">@L("NoRecords")</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="row">
+                            <div class="col-md-7">
+                                <ul boundary-link-numbers="true" class="margin-top-0" uib-pagination total-items="vm.totalCount" items-per-page="20" ng-model="vm.page" ng-change="vm.pageChanged()" max-size="5"></ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+                <button ng-disabled="vm.saving" type="button" class="btn btn-default" ng-click="vm.cancel()">@L("Cancel")</button>
+            </div>
+        </form>
+    </div>

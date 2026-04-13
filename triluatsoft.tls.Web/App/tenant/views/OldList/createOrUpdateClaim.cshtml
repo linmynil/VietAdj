@@ -1,0 +1,241 @@
+<div ng-controller="tenant.views.OldList.createOrUpdateClaim as vm">
+    <div class="row margin-bottom-5">
+        <div class="col-xs-6">
+            <div class="page-head">
+                <div class="page-title">
+                    <h1>
+                        <span ng-if="vm.item.claimId">Edit Claim: {{vm.item.claimId}}</span>
+                        <span ng-if="!vm.item.claimId">Create Claim</span>
+                    </h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="portlet light margin-bottom-0">
+        <div class="portlet-body">
+            <form action="#" class="form-horizontal" name="claimForm" novalidate>
+                <div class="form-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group has-error" id="OfficeValidate">
+                                <label class="control-label col-md-3">@L("Office")</label>
+                                <select class="form-control input-large" name="officeid" ng-disabled="vm.item.refStatusID == 2"
+                                        ng-model="vm.item.officeID" ng-change="vm.officeChange()">
+                                    <option value="1" ng-selected="1==vm.item.officeID">SG</option>
+                                    <option value="2" ng-selected="2==vm.item.officeID">HN</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class='col-md-6'>
+                            <div class="form-group">
+                                <label class="control-label col-md-3" style="padding-top:0">@L("DateOfAssignment")</label>
+                                <input type="text" name="dateOfAssignment" id="doa" class="form-control input-large" ng-model="vm.dateOfAssignment" ng-disabled="vm.item.refStatusID == 2" />
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group has-error" id="InsurerValidate">
+                                <label class="control-label col-md-3">@L("Insurer")</label>
+                                <select class="form-control input-large" name="insurer" ng-disabled="vm.item.refStatusID == 2"
+                                        ng-model="vm.item.insurerID" ng-options="opt.id as opt.name for opt in vm.listInsureres" ng-change="vm.insurerChange()"></select>
+
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">@L("DateOfLoss")</label>
+                                <input type="text" class="form-control input-large" ng-model="vm.dateOfLoss" id="dol" name="dol" ng-disabled="vm.item.refStatusID == 2" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">@L("Broker")</label>
+                                <select class="form-control input-large" ng-disabled="vm.item.refStatusID == 2"
+                                        ng-model="vm.item.brokerID" ng-options="opt.id as opt.name for opt in vm.listBrokers"></select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    @L("TypeOfLoss")
+                                </label>
+                                <select class="form-control input-large" ng-disabled="vm.item.refStatusID == 2"
+                                        ng-model="vm.item.typeOfLossID" name="typeOfLoss" ng-options="opt.id as opt.name for opt in vm.listTypeOfLoss"></select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">@L("TheInsured")</label>
+                                <input class="form-control input-large" name="theInsured" type="text" ng-model="vm.item.theInsured" ng-maxlength="100" ng-readonly="vm.item.refStatusID == 2">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label col-md-3" style="padding-top:0">@L("CauseOfLoss")</label>
+                                <select class="form-control input-large" ng-disabled="vm.item.refStatusID == 2"
+                                        ng-model="vm.item.causeID" name="cause" ng-options="opt.id as opt.name for opt in vm.listCauses" ng-change="vm.selectCause()"></select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label col-md-3" style="padding-top:0">@L("InsuredProject")</label>
+                                <input class="form-control input-large" type="text" ng-model="vm.item.insuredProject" maxlength="100" ng-readonly="vm.item.refStatusID == 2">
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">@L("OtherCause")</label>
+                                <input class="form-control input-large" id="otherCause" type="text" ng-model="vm.item.otherCause" maxlength="100" disabled ng-readonly="vm.item.refStatusID == 2">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label col-md-3" style="padding-top:0">@L("ClaimType")</label>
+                                <select class="form-control input-large" ng-disabled="vm.item.refStatusID == 2"
+                                        ng-model="vm.item.ctypeID" name="claimType" ng-options="opt.id as opt.code for opt in vm.listClaimTypes "></select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label col-md-3" style="padding-top:0">@L("EstimateOfLoss")</label>
+                                <div class="col-md-9 input-group">
+                                    <input class="form-control col-md-9 input-medium text-right" id="est" style="width:auto" type="text" name="est" ng-model="vm.item.estimate" sg-number-input ng-readonly="vm.item.refStatusID == 2">
+                                    <div class="input-group-append col-md-2">
+                                        <button id="CurrencyButton" type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown" ng-disabled="vm.item.refStatusID == 2">
+                                            NON <span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu dropdown-menu-right" ng-model="vm.item.currency">
+                                            <li><a href="#" ng-click="vm.setCurrency('NON');">NON</a></li>
+                                            <li><a href="#" ng-click="vm.setCurrency('USD');">USD</a></li>
+                                            <li><a href="#" ng-click="vm.setCurrency('VND');">VND</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">@L("PolicyNo")</label>
+                                <input class="form-control input-large" type="text" ng-model="vm.item.policyNo" maxlength="100" ng-readonly="vm.item.refStatusID == 2">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">@L("InsurersRef")</label>
+                                <input class="form-control input-large" type="text" ng-model="vm.item.clientsRef" maxlength="100" ng-readonly="vm.item.refStatusID == 2">
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label col-md-3" style="padding-top:0">@L("RiskLocation")</label>
+                                <input class="form-control input-large" type="text" ng-model="vm.item.riskLocation" maxlength="100" ng-readonly="vm.item.refStatusID == 2">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label col-md-3" style="padding-top:0">Claim Status</label>
+                                <select class="form-control input-large"
+                                        ng-model="vm.item.refStatusID" name="office" @*ng-disabled="vm.item.refStatusID == 2"*@ ng-disabled="!vm.grant_update_status && vm.item.claimId">
+                                    <option value="" ng-selected="1==vm.item.refStatusID">Outstanding</option>
+                                    <option value="2" ng-selected="2==vm.item.refStatusID">Closed</option>
+                                    <option value="3" ng-selected="3==vm.item.refStatusID">Re-opened</option>
+
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-5 text-center">
+                            @L("CoOwnerInsurer")
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-5">
+                                <select name="from" id="multiselect" class="form-control" size="8" multiple="multiple" ng-model="vm.listAvaiInsureres" ng-options="opt.id as opt.brandName for opt in vm.item.avaiCoOwners"></select>
+                            </div>
+                            <div class="col-md-2">
+                                <button type="button" id="multiselect_rightAll" class="btn btn-block hidden" ng-disabled="vm.item.refStatusID == 2"><i class="glyphicon glyphicon-forward"></i></button>
+                                <button type="button" id="multiselect_rightSelected" class="btn btn-block" ng-disabled="vm.item.refStatusID == 2"><i class="glyphicon glyphicon-chevron-right"></i></button>
+                                <button type="button" id="multiselect_leftSelected" class="btn btn-block" ng-disabled="vm.item.refStatusID == 2"><i class="glyphicon glyphicon-chevron-left"></i></button>
+                                <button type="button" id="multiselect_leftAll" class="btn btn-block hidden" ng-disabled="vm.item.refStatusID == 2"><i class="glyphicon glyphicon-backward"></i></button>
+                            </div>
+
+                            <div class="col-md-5">
+                                <select name="insurerto" id="multiselect_to" class="form-control" size="8" multiple="multiple" ng-model="vm.item.coOwnerInsureres" ng-options="opt.id as opt.brandName for opt in vm.item.coOwnerInsureres"></select>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-md-4 col-md-offset-1">
+                            @L("AEA")
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-xs-5">
+                                <select name="from" id="accountExecs" class="form-control" size="8" multiple="multiple" ng-model="vm.listAvaiEmployees" ng-options="opt.employeeId as opt.name for opt in vm.item.avaiAEs"></select>
+                            </div>
+                            <div class="col-xs-2">
+                                <button type="button" id="multiselect_rightAll" class="btn btn-block hidden" ng-disabled="vm.item.refStatusID == 2 || !vm.grant_assign"><i class="glyphicon glyphicon-forward"></i></button>
+                                <button type="button" id="js_right_Selected_1" class="btn btn-block" ng-disabled="vm.item.refStatusID == 2 || !vm.grant_assign"><i class="glyphicon glyphicon-chevron-right"></i></button>
+                                <button type="button" id="js_left_Selected_1" class="btn btn-block" ng-disabled="vm.item.refStatusID == 2 || !vm.grant_assign"><i class="glyphicon glyphicon-chevron-left"></i></button>
+                                <button type="button" id="multiselect_leftAll" class="btn btn-block hidden" ng-disabled="vm.item.refStatusID == 2 || !vm.grant_assign"><i class="glyphicon glyphicon-backward"></i></button>
+                            </div>
+
+                            <div id="AEAValidate" class=" col-xs-5 has-error">
+                                <select name="aeato" id="accountExecs_to" class="form-control" size="8" multiple="multiple" ng-model="vm.item.accountExecs" ng-options="opt.id as opt.name for opt in vm.listAccountExecs"></select>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group has-error" id="ACValidate">
+                                <label class="control-label col-md-4">@L("AccountManager")</label>
+                                <!--<select class="form-control input-large" required name="am" ng-model="vm.amID" ng-change="vm.selectedAM()"
+                                        ng-options="opt.id as opt.name for opt in vm.listAE track by opt.id" ng-disabled="vm.item.refStatusID == 2 || !vm.grant_assign"></select>-->
+                                <select class="form-control input-large" name="am" ng-readonly="vm.item.refStatusID == 2 || !vm.grant_assign"
+                                        ng-model="vm.item.accountManagerID" ng-options="opt.id as opt.name for opt in vm.listAE" ng-change="vm.selectedAM()"></select>                                
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="form-actions">
+                    <div class="row">
+                        <div class="text-center">
+                            <button type="button" class="btn btn-primary blue" onclick="history.back()">
+                                @L("Back")
+                            </button>
+                            <button type="submit" ng-disabled="vm.ACC || vm.IC || vm.OC" class="btn btn-primary blue" ng-click="vm.save($event)">
+                                @L("Save")
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

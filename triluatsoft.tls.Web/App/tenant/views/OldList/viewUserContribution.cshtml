@@ -1,0 +1,143 @@
+<div ng-controller="tenant.views.OldList.viewUserContribution as vm">
+    <div class="row margin-bottom-5">
+        <div class="col-xs-6">
+            <div class="page-head">
+                <div class="page-title">
+                    <h1>
+                        <span>@L("UserContribution")</span>
+                    </h1>
+                </div>
+            </div>
+        </div>
+      
+    </div>
+    <div class="portlet light margin-bottom-0">
+        <div class="portlet-body">
+            <form action="#" name="form" class="form-horizontal form-row-sepe ng-pristine ng-valid" busy-if="vm.loadingDate">
+                <div class="form-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group" ng-class="{ 'has-error' : form.daterange.$invalid }">
+                                <label class="control-label col-md-3">
+                                    @L("DateRange")
+                                </label>
+                                <div class="col-md-4">
+                                    <input date-range-picker type="text" required name="daterange"
+                                           options="vm.dateRangeOptions" min="vm.dateRangeOptions.min" max="vm.dateRangeOptions.max" 
+                                           class="form-control date-picker input-large" ng-model="vm.dateRangeModel" />
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group" ng-class="{ 'has-error' : form.employeeID.$invalid }">
+                                <label class="control-label col-md-3">
+                                    @L("Employee")
+                                </label>
+                                <div class="col-md-4">
+                                    <select class="form-control input-large" required name="employeeID"
+                                            ng-model="vm.searchdata.employeeID" ng-options="opt.employeeId as opt.name for opt in vm.listEmps">
+
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <div class="row">
+                        <div class="col-md-offset-3">
+                            <button type="submit" class="btn btn-primary blue" ng-click="vm.viewContributionR($event)"
+                                    ng-disabled="form.$invalid">
+                                @L("ViewContributionReport")
+                            </button>
+                            <button type="submit" class="btn btn-primary blue" ng-click="vm.viewIncomeI($event)"
+                                    ng-disabled="form.$invalid">
+                                @L("ViewIncomeInfo")
+                            </button>
+                            <button type="submit" class="btn btn-primary blue" ng-click="vm.exportExcel($event)"
+                                    ng-disabled="form.$invalid || !vm.action">
+                                @L("ExportExcel")
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <br />
+            <table busy-if="vm.userContributionLoading" class="table table-striped table-bordered table-hover table-checkable dataTable no-footer" cellspacing="0" ng-hide=vm.hide>
+                <thead role="row">
+                    <tr>
+                        <th class="text-center">@L("No.")</th>
+                        <th class="text-center">@L("Timesheet")</th>
+                        <th class="text-center">@L("C1")</th>
+                        <th class="text-center">DoT</th>
+                        <th class="text-center">@L("C2")</th>
+                        <th class="text-center">DoI</th>
+                        <th class="text-center">@L("Balance")</th>
+                        <th class="text-center">@L("C")</th>
+                    </tr>
+                </thead>
+                    <tr ng-repeat="item in vm.listUserContribution">
+                        <td class="text-right">{{item.ord}}</td>
+                        <td class="text-left">{{item.timeSheetName}}</td>
+                        <td class="text-right">{{item.c1 | number: 0}}</td>
+                        <td class="text-center">{{item.s1 | date: 'dd-MM-yyyy'}}</td>
+                        <td class="text-right">{{item.c2 | number: 0}}</td>
+                        <td class="text-center">{{item.s2 | date: 'dd-MM-yyyy'}}</td>
+                        <td class="text-right">{{item.balance | number: 0}}</td>
+                        <td class="text-right">{{item.c | number: 0}}</td>
+                    </tr>
+                <tr ng-show="vm.listUserContribution.length == 0">
+                    <td colspan="8">@L("NoRecords")</td>
+                </tr>
+                <tr class="text-left">
+                    <td colspan="8" class="text-info" style="text-align:left; font-style:italic; padding-left:10px;">                        
+                        <!--Note: The values on columns C1, C2 and Balance are displayed on the above table depending on the issuance time of Timesheet - S1(i) and invoice - S2(i), corresponding to TS in the range of [t1:t2]<br />
+                        Of which: S1(i) is the issuance date of TS(i); S2(i) is the issuance date of invoice of TS(i).<br /><br />-->
+                        C1  =  80%  of timesheets submitted but not invoiced yet;<br />
+                        C2  =  Actual Fee of Las &nbsp; X &nbsp;
+                        <span style="display: inline-block; vertical-align: middle;">
+                            <div style="text-align: center; border-bottom: 1px solid black; border-bottom-color:cornflowerblue;">Fee of Invoice VAT</div>
+                            <div style="text-align: center;">Total Actual fee of timesheet</div>
+                        </span><br />
+                        Balance  =  C2  –  C1;<br />
+                        C: Contribution in the selected range of dates (from … to)<br />
+                        C = C2: When DoT and DoI are between the selected range of dates (from … to)<br />
+                        C = C1: When DoT is between the selected range of dates (from … to) and DoI is beyond the selected range of dates (from … to).<br />
+                        C = C2 - C1: When DoT is beyond the selected range of dates (from … to) and DoI is between the selected range of dates (from … to).
+                        <!--
+                        C  =  C2: Timesheet have the final invoice and the issuance date of timesheet and the issuance date of invoice fall into searching period;<br />
+                        C  =  C1: timesheet have not final invoice yet.<br />
+                        C  =  C2  -  C1: timesheet have the final invoice and the same of period of the issuance date of timesheet and the issuance date of invoice is different.                        
+                        -->
+                    </td>
+                </tr>
+            </table>
+
+            <table busy-if="vm.userIncomeLoading" class="table table-striped table-bordered table-hover table-checkable dataTable no-footer" cellspacing="0" ng-hide=vm.hide1>
+                <thead role="row">
+                    <tr>
+                        <th class="text-center">@L("Month")</th>
+                        <th class="text-center">@L("Scholaship")</th>
+                        <th class="text-center">@L("Other")</th>
+                        <th class="text-center">@L("Salary")</th>
+                        <th class="text-center">@L("Income")</th>
+                    </tr>
+                </thead>
+
+                <tr ng-repeat="item in vm.listUserIncome">
+                    <td class="text-left">{{item.month}}</td>
+                    <td class="text-right">{{item.scholaship | number: 0}}</td>
+                    <td class="text-right">{{item.other | number: 0}}</td>
+                    <td class="text-right">{{item.salary | number: 0}}</td>
+                    <td class="text-right">{{item.income | number: 0}}</td>
+                </tr>
+                <tr ng-show="vm.listUserIncome.length == 0">
+                    <td colspan="15">@L("NoRecords")</td>
+                </tr>
+            </table>
+
+        </div>
+    </div>
+</div>

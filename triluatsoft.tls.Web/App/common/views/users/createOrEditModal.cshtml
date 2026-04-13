@@ -1,0 +1,106 @@
+@using Abp.Authorization.Users
+<div>
+    <form name="userCreateOrEditForm" role="form" novalidate class="form-validation">
+        <div class="modal-header">
+            <h4 class="modal-title">
+                <span ng-if="vm.user.id">@L("EditUser"): {{vm.user.userName}}</span>
+                <span ng-if="!vm.user.id">@L("CreateNewUser")</span>
+            </h4>
+        </div>
+        <div class="modal-body">
+            <uib-tabset class="tab-container tabbable-line">
+                <uib-tab heading="@L("UserInformations")">
+                    <div class="form-group form-md-line-input form-md-floating-label no-hint">
+                        <input class="form-control" type="text" name="Name" ng-class="{'edited':vm.user.name}" ng-model="vm.user.name" required maxlength="@triluatsoft.tls.Authorization.Users.User.MaxNameLength">
+                        <label>@L("Name")</label>
+                    </div>
+                    <div class="form-group form-md-line-input form-md-floating-label no-hint">
+                        <input type="text" name="JobTitle" class="form-control" ng-class="{'edited':vm.user.jobTitle}" ng-model="vm.user.jobTitle" required maxlength="@triluatsoft.tls.Authorization.Users.User.MaxNameLength">
+                        <label>@L("JobTitle")</label>
+                    </div>
+
+                    <div class="form-group form-md-line-input form-md-floating-label no-hint">
+                        <input type="text" name="Position" class="form-control" ng-class="{'edited':vm.user.jobPosition}" ng-model="vm.user.jobPosition" required maxlength="@triluatsoft.tls.Authorization.Users.User.MaxNameLength">
+                        <label>@L("Position")</label>
+                    </div>
+
+                    <div class="form-group form-md-line-input form-md-floating-label no-hint">
+                        <input type="text" name="DateOfBirth" class="form-control" ng-class="{'edited':vm.user.birthday}" ng-model="vm.user.birthday" datetime="dd-MM-yyyy">
+                        
+                        <label>@L("DateOfBirth")</label>
+                    </div>
+
+                    <div class="form-group form-md-line-input form-md-floating-label no-hint">
+                        <input type="text" name="Address" class="form-control" ng-class="{'edited':vm.user.address}" ng-model="vm.user.address">
+                        <label>@L("Address")</label>
+                    </div>
+
+                    <div class="form-group form-md-line-input form-md-floating-label no-hint">
+                        <input type="text" name="PhoneNumber" class="form-control" ng-class="{'edited':vm.user.phoneNumber}" ng-model="vm.user.phoneNumber" maxlength="@triluatsoft.tls.Authorization.Users.User.MaxPhoneNumberLength">
+                        <label>@L("PhoneNumber")</label>
+                    </div>
+
+                    <div class="form-group form-md-line-input form-md-floating-label no-hint">
+                        <input type="email" name="EmailAddress" class="form-control" ng-class="{'edited':vm.user.emailAddress}" ng-model="vm.user.emailAddress" required maxlength="@AbpUserBase.MaxEmailAddressLength">
+                        <label>@L("EmailAddress")</label>
+                    </div>
+
+                    <div class="form-group form-md-line-input form-md-floating-label">
+                        <input type="text" ng-disabled="!vm.canChangeUserName" ng-class="{'edited':vm.user.userName}" name="UserName" class="form-control input-ltr" ng-model="vm.user.userName" required maxlength="@AbpUserBase.MaxUserNameLength">
+                        <label>@L("UserName")</label>
+                        <span class="help-block" ng-show="!vm.canChangeUserName">@L("CanNotChangeAdminUserName")</span>
+                    </div>
+
+                    <div class="form-group form-md-line-input form-md-floating-label no-hint">
+                        <input type="password" name="Password" class="form-control" ng-model="vm.user.password" ng-required="!vm.user.id && !vm.setRandomPassword" maxlength="@triluatsoft.tls.Authorization.Users.User.MaxPlainPasswordLength" ng-minlength="@triluatsoft.tls.Authorization.Users.User.MinPlainPasswordLength">
+                        <label>@L("Password")</label>
+                    </div>
+
+                    <div class="form-group form-md-line-input form-md-floating-label no-hint">
+                        <input type="password" name="PasswordRepeat" class="form-control" ng-model="vm.user.passwordRepeat" ng-required="!vm.user.id && !vm.setRandomPassword" maxlength="@triluatsoft.tls.Authorization.Users.User.MaxPlainPasswordLength" ui-validate=" '$value==vm.user.password' " ui-validate-watch=" 'vm.user.password' " ng-minlength="@triluatsoft.tls.Authorization.Users.User.MinPlainPasswordLength">
+                        <label>@L("PasswordRepeat")</label>
+                    </div>
+                    <div class="form-group form-md-line-input form-md-floating-label no-hint">
+                        <input type="text" name="Fee" class="form-control" ng-class="{'edited':vm.user.fee}" ng-model="vm.user.fee">
+                        <label>@L("Fee")</label>
+                    </div>
+                    <div class="form-group form-md-line-input form-md-floating-label no-hint">
+                        <input type="text" name="EmployeeID" class="form-control" ng-class="{'edited':vm.user.employeeId}" ng-model="vm.user.employeeId" readonly>
+                        <label>@L("EmployeeID")</label>
+                    </div>
+                    <div class="md-checkbox-list">
+                        <div class="md-checkbox">
+                            <input id="EditUser_IsActive" class="md-check" type="checkbox" name="IsActive" ng-model="vm.user.isActive">
+                            <label for="EditUser_IsActive">
+                                <span class="inc"></span>
+                                <span class="check"></span>
+                                <span class="box"></span>
+                                @L("Active")
+                            </label>
+                        </div>
+                    </div>
+                </uib-tab>
+                <uib-tab>
+                    <uib-tab-heading>
+                        @L("Roles") <b class="badge badge-primary">{{vm.getAssignedRoleCount()}}</b>
+                    </uib-tab-heading>
+                    <div class="md-checkbox-list">
+                        <div class="md-checkbox" ng-repeat="role in vm.roles">
+                            <input id="EditUser_{{role.roleName}}" class="md-check" type="checkbox" name="{{role.roleName}}" ng-model="role.isAssigned">
+                            <label for="EditUser_{{role.roleName}}">
+                                <span class="inc"></span>
+                                <span class="check"></span>
+                                <span class="box"></span>
+                                {{role.roleDisplayName}}
+                            </label>
+                        </div>
+                    </div>
+                </uib-tab>
+            </uib-tabset>
+        </div>
+        <div class="modal-footer">
+            <button ng-disabled="vm.saving" type="button" class="btn btn-default" ng-click="vm.cancel()">@L("Cancel")</button>
+            <button type="submit" button-busy="vm.saving" busy-text="@L("SavingWithThreeDot")" class="btn btn-primary blue" ng-click="vm.save()" ng-disabled="userCreateOrEditForm.$invalid"><i class="fa fa-save"></i> <span>@L("Save")</span></button>
+        </div>
+    </form>
+</div>

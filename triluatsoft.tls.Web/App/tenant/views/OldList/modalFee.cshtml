@@ -1,0 +1,103 @@
+﻿<div>
+    <form name="feeForm" role="form" class="form-validation">
+        <div class="panel-group">
+            <div class="modal-header">
+                <button type="button" class="close" ng-click="vm.cancel()">&times;</button>
+                <h4 class="modal-title">
+                    <span ng-if="vm.item.professionalFeeID">@L("EditFee")</span>
+                    <span ng-if="!vm.item.professionalFeeID">@L("AddFee")</span>
+                </h4>
+            </div>
+            <div class="modal-body">
+
+                <div class="row" style="margin-bottom:5px">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-4" style="width:150px">
+                                @L("Timesheet")
+                            </label>
+                            <div class="col-md-4">
+                                <label>{{vm.timesheetName}}</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-bottom:5px">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-4" style="width:150px">
+                                @L("Date")
+                            </label>
+                            <div class="col-md-4">
+                                <input type="text" name="inputDate" id="date" class="form-control input-large" ng-model="vm.item.inputDate">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-bottom:5px">
+                    <div class="col-md-6">
+                        <div class="form-group" ng-class="{ 'has-error' : feeForm.task.$invalid}">
+                            <label class="control-label col-md-4" style="width:150px">
+                                @L("JobCode")
+                            </label>
+                            <div class="col-md-4">
+                                <select class="form-control input-large" ng-model="vm.item.jobCodeID" name="task" ng-options="opt.id as opt.name for opt in vm.listTasks" required ng-change="vm.selectTask()"></select>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-bottom:5px">
+                    <div class="col-md-6">
+                        <div class="form-group" ng-class="{ 'has-error' : feeForm.notes.$invalid}">
+                            <label class="control-label col-md-4" style="width:150px">
+                                @L("Description")
+                            </label>
+                            <div class="col-md-4">
+                                <textarea class="form-control" ng-model="vm.item.notes" name="notes" style="width:320px" required></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-bottom:5px">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-4" style="width:150px">
+                                @L("StandardTime")
+                            </label>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control input-large" ng-model="vm.item.standardTime" maxlength="20" disabled>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-bottom:5px">
+                    <div class="col-md-6">
+                        <div class="form-group" ng-class="{ 'has-error' : feeForm.workTime.$invalid}">
+                            <label class="control-label col-md-4" style="width:150px">
+                                @L("ActualTime")
+                            </label>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control input-large timeinputmask" size="5" id="worktime"
+                                       name="workTime" ng-model="vm.item.workTimeStr" required
+                                       ui-mask="99:99"
+                                       ui-mask-placeholder="__:__"
+                                       @*ui-mask-placeholder*@
+                                       @*ui-mask-placeholder-char="_"*@
+                                       ng-change="vm.OnchangeActualTime()">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" ng-click="vm.cancel()">@L("Cancel")</button>
+            <button type="submit" class="btn btn-primary blue" ng-click="vm.save()" ng-disabled="vm.saving || feeForm.$invalid"><i class="fa fa-save"></i> <span>@L("Save")</span></button>
+
+        </div>
+    </form>
+</div>

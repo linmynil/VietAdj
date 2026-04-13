@@ -1,0 +1,189 @@
+﻿<style>
+    .table > thead > tr > th {
+        vertical-align: middle;
+    }
+
+    .table > tbody > tr > td,
+    .table > tbody > tr > th,
+    .table > tfoot > tr > td,
+    .table > tfoot > tr > th,
+    .table > thead > tr > td,
+    .table > thead > tr > th {
+        vertical-align: middle;
+    }
+</style>
+<div ng-controller="tenant.views.OldList.viewOtherReceiptsPayments as vm">
+    <div class="row margin-bottom-5">
+        <div class="col-xs-6">
+            <div class="page-head">
+                <div class="page-title">
+                    <h1>
+                        <span>@L("OtherReceiptsPayments")</span>
+                    </h1>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-6 text-right">
+            <button class="btn btn-primary blue" ng-click="vm.openModal()"><i class="fa fa-plus"></i>@L("Create")</button>
+        </div>
+    </div>
+    <div class="portlet light margin-bottom-0">
+        <div class="portlet-body">
+            <form action="#" class="form-horizontal form-row-sepe ng-pristine ng-valid" busy-if="vm.loadingDate">
+                <div class="form-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    @L("From")
+                                </label>
+                                    <div class="col-md-9">
+                                        <input type="text" name="from" id="from" class="form-control input-large" ng-model="vm.from">
+                                    </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    @L("To")
+                                </label>
+                                <div class="col-md-9">
+                                    <input type="text" name="to" id="to" class="form-control input-large" ng-model="vm.to">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    @L("ClaimRef")
+                                </label>
+                                <div class="col-md-4">
+                                    <input type="text" class="form-control input-large" maxlength="50" ng-model="vm.searchdata.refNbr">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group" style="margin-bottom:0px">
+                                <label class="col-md-3 control-label">@L("Description")</label>
+                                <div class="col-md-4">
+                                    <input type="text" class="form-control input-large" maxlength="100" ng-model="vm.searchdata.description">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    @L("ReceiptPayment")
+                                </label>
+                                <div class="col-md-4">
+                                    <select class="form-control input-large"
+                                            ng-model="vm.searchdata.voucherType">
+                                        <option selected="selected" value="-1">All</option>
+                                        <option value="R">Receipt</option>
+                                        <option value="P">Payment</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    @L("PaymentMethod")
+                                </label>
+                                <div class="col-md-4">
+                                    <select class="form-control input-large"
+                                            ng-model="vm.searchdata.paymentMethod">
+                                        <option selected="selected" value="-1">All</option>
+                                        <option value="C">Cash</option>
+                                        <option value="B">TT</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    @L("FromAmount")
+                                </label>
+                                <div class="col-md-4">
+                                    <input type="text" sg-number-input class="form-control input-large text-right" maxlength="12" ng-model="vm.searchdata.amountFrom">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group" style="margin-bottom:0px">
+                                <label class="col-md-3 control-label">@L("ToAmount")</label>
+                                <div class="col-md-4">
+                                    <input type="text" sg-number-input class="form-control input-large text-right" maxlength="12" ng-model="vm.searchdata.amountTo">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <div class="row">
+                        <div class="col-md-offset-5 col-md-9">
+                            <button type="submit" ng-disabled="vm.loading" class="btn btn-primary blue" ng-click="vm.searchLogs($event)">
+                                @L("Search")
+                            </button>
+                            <button type="reset" class="btn btn-primary blue" ng-click="vm.reset()">
+                                @L("Reset")
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <br />
+            <div class="row form-group col-lg-12 text-right bold">Total: {{vm.sumValue | number:0}}</div>
+            <table class="table table-striped table-bordered table-hover no-footer" busy-if="vm.loading" >
+                <thead role="row">
+                    <tr>
+                        <th class="text-center">@L("Description")</th>
+                        <th class="text-center col-md-2">@L("Date")</th>
+                        <th class="text-center col-md-1">@L("PaymentMethod")</th>
+                        <th class="text-center col-md-1">@L("ReceiptPayment")</th>
+                        <th class="text-center">@L("Amount")</th>
+                        <th class="text-center">@L("Currency")</th>
+                        <th class="text-center col-md-2">@L("Action")</th>
+                    </tr>
+                </thead>
+                <tr ng-repeat="item in vm.list">
+                    <td class="text-left">{{item.description}}</td>
+                    <td class="text-center">{{item.createdDate | date:'dd-MM-yyyy'}}</td>
+                    <td class="text-center">{{item.paymentMethod}}</td>
+                    <td class="text-center">{{item.voucherTypeString}}</td>
+                    <td class="text-right">{{item.amount | number:0}}</td>
+                    <td class="text-center">VND</td>
+                    <td class="text-center">
+                        <button ng-click="vm.openModalHistoryPayment(item.id)" title="@L("History")" class="btn btn-circle btn-icon-only blue" href="javascript:;" style="margin-left:0px;margin-right:0px">
+                            <i class="glyphicon glyphicon-time"></i>
+                        </button>
+                        <button ng-click="vm.openModal(item.id)" title="@L("Edit")" class="btn btn-circle btn-icon-only blue" href="javascript:;" style="margin-right:0px;margin-left:0px">
+                            <i class="icon-pencil"></i>
+                        </button>
+                        <button ng-click="vm.deletePayment(item.id)" title="@L("Delete")" class="btn btn-circle btn-icon-only red" href="javascript:;" style="margin-right:0px;margin-left:0px">
+                            <i class="icon-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+
+                <tr ng-show="vm.list.length == 0">
+                    <td colspan="15">@L("NoRecords")</td>
+                </tr>
+            </table>
+            <div class="row">
+                <div class="col-md-7">
+                    <ul boundary-link-numbers="true" class="margin-top-0" uib-pagination total-items="vm.totalCount" items-per-page="20" ng-model="vm.page" ng-change="vm.pageChanged()" max-size="5"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,206 @@
+﻿<div ng-controller="tenant.views.dashboard.index as vm">
+    <div class="row margin-bottom-5">
+        <div class="col-xs-6">
+            <div class="page-head">
+                <div class="page-title">
+                    <h1>
+                        <span>@L("Dashboard")</span>
+                    </h1>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-6 text-right">
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading" style="background-color:white">
+            <div class="panel-title">
+                <h3 style="margin-top:3px">@L("Bordereaux")</h3>                
+            </div>            
+            <table class="table table-striped table-bordered table-hover table-checkable dataTable no-footer" cellspacing="0">
+                <thead role="row">
+                    <tr style="background-color: lightblue;">
+                        <th class="text-center" style="width:8%" font:caption">@L("ClaimRef")</th>
+                        <th class="text-center" font:caption" style="width:72%">@L("Status")</th>
+                        <th class="text-center col-md-2" font:caption" style="width:12%">@L("DateRecentCorres")</th>
+                        <th class="text-center col-md-1" font:caption" style="width:8%">@L("Remark")</th>
+
+                    </tr>
+                    <tr ng-repeat="borderaux in vm.borderauxList.slice(((vm.bdrcurrentPage-1)*vm.bdritemsPerPage), ((vm.bdrcurrentPage)*vm.bdritemsPerPage))">
+                        <td class="text-center" style="width:8%">{{borderaux.claimID}}</td>
+                        <td class="text-center" style="width:72%">{{borderaux.message}}</td>
+                        <td class="text-center" style="width:12%">{{borderaux.recentCorrespondence | date:'dd/MM/yyyy'}}</td>                        
+                        <td ng-class="borderaux.remark == 'MISSED' ? 'text-center text-danger bold' : 'text-center'" style="width:8%">{{borderaux.remark}}</td>                                                
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            <ul uib-pagination total-items="vm.bdrtotalItems" ng-model="vm.bdrcurrentPage" max-size="vm.bdrmaxSize" class="pagination-sm" boundary-links="true" force-ellipses="true"></ul>
+                        </td>
+                    </tr>
+                    <tr ng-show="vm.borderauxList.length == 0">
+                        <td colspan="4">@L("NoRecords")</td>
+                    </tr>                    
+                </thead>
+            </table>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading" style="background-color:white">
+            <div class="panel-title"><h3 style="margin-top:3px">@L("ListTSApproval")</h3></div>
+            <table class="table table-striped table-bordered table-hover table-checkable dataTable no-footer" cellspacing="0">
+                <thead role="row">
+                    <tr style="background-color: lightblue;">
+                        <th class="text-center" style="width:8%">@L("ClaimRef")</th>
+                        <th class="text-center" font:caption" style="width:17%">@L("Timesheet")</th>
+                        <th class="text-center" font:caption" style="width:25%">@L("SubmittedBy")</th>
+                        <th class="text-center" font:caption" style="width:25%">@L("SubmittedDate")</th>
+                        <th class="text-center" font:caption" style="width:25%">@L("ApprovedBy")</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="timesheetapp in vm.approvedTimesheet.slice(((vm.apprcurrentPage-1)*vm.appritemsPerPage), ((vm.apprcurrentPage)*vm.appritemsPerPage))">
+                        <td class="text-left" style="width:8%">{{timesheetapp.claimID}}</td>
+                        <td class="text-center" style="width:17%">{{timesheetapp.timeSheetName}}</td>
+                        <td class="text-center" style="width:25%">{{timesheetapp.submitByName}}</td>
+                        <td class="text-center" style="width:25%">{{timesheetapp.submitDate | date:'dd/MM/yyyy' : 'UTC' }}</td>
+                        <td class="text-center" style="width:25%">{{timesheetapp.updateByName}}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="5">
+                            <ul uib-pagination total-items="vm.apprtotalItems" ng-model="vm.apprcurrentPage" max-size="vm.apprmaxSize" class="pagination-sm" boundary-links="true" force-ellipses="true"></ul>
+                        </td>
+                    </tr>
+                    <tr ng-show="vm.approvedTimesheet.length == 0">
+                        <td colspan="5">@L("NoRecords")</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading" style="background-color:white">
+            <div class="panel-title"><h3 style="margin-top:3px">@L("ListTSSubmission")</h3></div>
+            <table class="table table-striped table-bordered table-hover table-checkable dataTable no-footer" cellspacing="0">
+                <thead role="row">
+                    <tr style="background-color: lightblue;">
+                        <th class="text-center" style="width:8%">@L("ClaimRef")</th>
+                        <th class="text-center" font:caption" style="width:15%">@L("Insurer")</th>
+                        <th class="text-center" font:caption" style="width:62%">@L("TheInsured")</th>
+                        <th class="text-center" font:caption" style="width:15%">AM</th>                        
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="timesheetsub in vm.submissionTimesheet.slice(((vm.subcurrentPage-1)*vm.subitemsPerPage), ((vm.subcurrentPage)*vm.subitemsPerPage))">
+                        <td class="text-left" style="width:8%">{{timesheetsub.id}}</td>
+                        <td class="text-center" style="width:15%">{{timesheetsub.insurerName}}</td>
+                        <td class="text-center" style="width:62%">{{timesheetsub.theInsured}}</td>
+                        <td class="text-center" style="width:15%">{{timesheetsub.accManName}}</td>                        
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            <ul uib-pagination total-items="vm.subtotalItems" ng-model="vm.subcurrentPage" max-size="vm.submaxSize" class="pagination-sm" boundary-links="true" force-ellipses="true"></ul>
+                        </td>
+                    </tr>
+                    <tr ng-show="vm.submissionTimesheet.length == 0">
+                        <td colspan="4">@L("NoRecords")</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading" style="background-color:white">
+            <div class="panel-title"><h3 style="margin-top:3px">@L("OutstandingClaims")</h3></div>
+            <table class="table table-striped table-bordered table-hover table-checkable dataTable no-footer" cellspacing="0">
+                <thead role="row">
+                    <tr style="background-color: lightblue;">                        
+                        <th class="text-center" font:caption">@L("Description")</th>
+                        <th class="text-center" font:caption">@L("HaNoi")</th>
+                        <th class="text-center" font:caption">@L("SaiGon")</th>
+                        <th class="text-center" font:caption">@L("Total")</th>
+                    </tr>
+                    <tr ng-repeat="outstand in vm.outstandingList">
+                        <td class="text-center">No. of claims</td>
+                        <td class="text-center">{{outstand.hn}}</td>
+                        <td class="text-center">{{outstand.sg}}</td>
+                        <td class="text-center">{{outstand.total}}</td>                        
+                    </tr>                    
+                </thead>
+            </table>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading" style="background-color:white">
+            <div class="panel-title"><h3 style="margin-top:3px">@L("DeadlinesManagement")</h3></div>
+            <table class="table table-striped table-bordered table-hover table-checkable dataTable no-footer" cellspacing="0">
+                <thead role="row">
+                    <tr style="background-color: lightblue;">
+                        <th class="text-center" style="width:8%">@L("ClaimRef")</th>
+                        <th class="text-center" font:caption" style="width:42%">@L("Description")</th>
+                        <th class="text-center" font:caption" style="width:10%">@L("Assignedby")</th>
+                        <th class="text-center" font:caption" style="width:10%">@L("AssignTo")</th>
+                        <th class="text-center" font:caption" style="width:15%">@L("Date")</th>
+                        <th class="text-center" font:caption" style="width:15%">@L("Deadline")</th>
+                    </tr>
+                    <tr ng-repeat="deadline in vm.deadlinesList">
+                        <td class="text-center" ng-class="deadline.isMissed == true ? 'text-danger bold' : ''" style="width:8%">{{deadline.claimID}}</td>
+                        <td class="text-left" ng-class="deadline.isMissed == true ? 'text-danger bold' : ''" style="width:42%">{{deadline.taskName}}</td>
+                        <td class="text-center" ng-class="deadline.isMissed == true ? 'text-danger bold' : ''" style="width:10%">{{deadline.createdUser}}</td>
+                        <td class="text-center" ng-class="deadline.isMissed == true ? 'text-danger bold' : ''" style="width:10%">{{deadline.assignee}}</td>
+                        <td class="text-center" ng-class="deadline.isMissed == true ? 'text-danger bold' : ''" style="width:15%">{{deadline.startDate | date:'dd/MM/yyyy HH:mm:ss' : 'UTC'}}</td>
+                        <td class="text-center" ng-class="deadline.isMissed == true ? 'text-danger bold' : ''" style="width:15%">{{deadline.endDate | date:'dd/MM/yyyy HH:mm:ss' : 'UTC'}}</td>
+                    </tr>                    
+                </thead>
+            </table>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading" style="background-color:white">
+
+            <div class="panel-title" font-size:20px"><h3 style="margin-top:3px">@L("MyClaims")</h3></div>
+            <div class="row" style="padding-top:8px;padding-bottom:8px">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="control-label col-md-3">
+                            @L("Filter")
+                        </label>
+                        <div class="col-md-4">
+                            <select class="form-control input-large" ng-model="vm.claim_filter" ng-change="vm.myclaims()">
+                                <option ng-selected="selected" selected="selected" value="0">AM</option>
+                                <option value="1">AE</option>
+                                <option value="2">All</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <table class="table table-striped table-bordered table-hover table-checkable dataTable no-footer" cellspacing="0" at-config="config" at-paginated>
+                <thead role="row">
+                    <tr style="background-color: lightblue;">
+                        <th class="text-center" font:caption" style="width:8%">@L("ClaimRef")</th>
+                        <th class="text-center" font:caption" style="width:60%">@L("Insurer")</th>
+                        <th class="text-center" font:caption" style="width:20%">@L("AccountManager")</th>
+                        <th class="text-center" font:caption" style="width:12%">@L("Reserve")</th>
+                    </tr>
+                    <tr ng-repeat="myclaim in vm.myClaimsList.slice(((vm.currentPage-1)*vm.itemsPerPage), ((vm.currentPage)*vm.itemsPerPage))">
+                        <td class="text-center" style="width:8%">{{myclaim.id}}</td>
+                        <td class="text-center" style="width:60%">{{myclaim.insurer}}</td>
+                        <td class="text-center" style="width:20%">{{myclaim.accountManager}}</td>
+                        <td class="text-right" style="width:12%">{{myclaim.reserve | number}}</td>                        
+                    </tr>
+                    <tr>
+                        <td colspan="4">                            
+                            <ul uib-pagination total-items="vm.totalItems" ng-model="vm.currentPage" max-size="vm.maxSize" class="pagination-sm" boundary-links="true" force-ellipses="true"></ul>
+                        </td>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>

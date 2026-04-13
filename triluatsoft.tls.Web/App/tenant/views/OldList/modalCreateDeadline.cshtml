@@ -1,0 +1,125 @@
+﻿<div>
+    <form name="form" role="form" class="form-validation">
+        <div class="panel-group">
+            <div class="modal-header">
+                <button type="button" class="close" ng-click="vm.cancel()">&times;</button>
+                <h4 class="modal-title">
+                    <span ng-if="vm.item.id">@L("EditDeadLine")</span>
+                    <span ng-if="!vm.item.id">@L("CreateDeadline")</span>
+                </h4>
+            </div>
+            <div class="modal-body" busy-if="vm.loading">
+              
+                <div class="row" style="margin-bottom:5px">
+                    <div class="col-md-6">
+                        <div class="form-group" ng-class="{ 'has-error' : form.claimID.$invalid}">
+                            <label class="control-label col-md-4" style="width:150px">
+                                @L("Claim")
+                            </label>
+                            <div class="col-md-4">
+                                <select class="form-control input-large" autofocus required 
+                                        ng-options=" x for x in vm.listClaims" ng-model="vm.item.claimID" 
+                                        ng-change="vm.selectClaim()" ng-disabled="vm.item.id" name="claimID">
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-bottom:5px">
+                    <div class="col-md-6">
+                        <div class="form-group" ng-class="{ 'has-error' : form.assignee.$invalid}">
+                            <label class="control-label col-md-4" style="width:150px">
+                                @L("Assignee")
+                            </label>
+                            <div class="col-md-4">
+
+                                <select class="form-control input-large" required 
+                                        ng-options=" x.employeeID as x.name for x in vm.listEmployees" 
+                                        ng-model="vm.item.employeeID" name="assignee">
+
+                                </select>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-bottom:5px">
+                    <div class="col-md-6">
+                        <div class="form-group" ng-class="{ 'has-error' : form.taskName.$invalid}">
+                            <label class="control-label col-md-4" style="width:150px">
+                                @L("Name")
+                            </label>
+                            <div class="col-md-4">
+                                <select class="form-control input-large" required 
+                                        ng-options="x.id as x.name for x in vm.listTasks" 
+                                        ng-model="vm.item.taskNameID" ng-change="vm.selectTask()"
+                                        name="taskName">
+
+                                </select>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-bottom:5px">
+                    <div class="col-md-6">
+                        <div class="form-group" ng-class="{ 'has-error' : form.description.$invalid}">
+                            <label class="control-label col-md-4" style="width:150px">
+                                @L("Description")
+                            </label>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control input-large" required maxlength="200" 
+                                       ng-model="vm.item.description" name="description">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-bottom:5px">
+                    <div class="col-md-6">
+                        <div class="form-group" >
+                            <label class="control-label col-md-4" style="width:150px">
+                                @L("Deadline")
+                            </label>
+                            <div class="col-md-4">
+                               <input type="text" class="form-control input-large" id="end" ng-model="vm.enddate">
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                <div class="row" style="margin-bottom:5px">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="control-label col-md-4" style="width:150px">
+                                @L("AssignmentDate")
+                            </label>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control input-large" id="start" ng-model="vm.startdate">
+                            </div>
+                            </div>
+                        </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="control-label col-md-4" style="width:150px">
+                            </label>
+                            <div class="col-md-6">
+                                <label class="mt-checkbox" style="margin-top:10px" >
+                                    <input type="checkbox" ng-model="vm.item.isCompleted">
+                                    Complete?
+                                    <span></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" ng-click="vm.cancel()">@L("Cancel")</button>
+                <button type="submit" class="btn btn-primary blue" ng-click="vm.save()" ng-disabled="vm.saving || form.$invalid" ><i class="fa fa-save"></i> <span>@L("Save")</span></button>
+          
+            </div>
+        </form>
+    </div>

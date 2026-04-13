@@ -1,0 +1,145 @@
+<div ng-controller="tenant.views.OldList.updateBorderaux as vm">
+    <div class="row margin-bottom-5">
+        <div class="col-xs-6">
+            <div class="page-head">
+                <div class="page-title">
+                    <h1>
+                      Update Borderaux Status
+                    </h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="portlet light margin-bottom-0">
+        <div class="portlet-body">
+            <form action="#" class="form-horizontal" name="claimForm" novalidate>
+                <div class="form-body">
+                    <div class="row">
+
+                        <div class="col-lg-6 col-md-6 col-sm-6 form-horizontal">
+                            <div class="form-group" ng-class="{ 'has-error' : claimForm.claimID.$invalid}">
+                                <label class="control-label col-lg-4">@L("ClaimRef")</label>
+                                <div class="col-lg-8">
+                                    <select class="form-control" name="claimID" required
+                                            ng-model="vm.item.claimId" ng-options="x for x in vm.item.claims" ng-change="vm.selectClaimId()"></select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-lg-4">@L("IssuedReport")</label>
+                                <div class="col-lg-8">
+                                    <select class="form-control"
+                                            ng-model="vm.item.reportID" ng-options="opt.reportID as opt.name for opt in vm.item.listReport"></select>
+                                </div>
+                            </div>
+                            <div class="form-group" ng-class="{ 'has-error' : claimForm.claimStatusid.$invalid}">
+                                <label class="control-label col-lg-4">@L("Status")</label>
+                                <div class="col-lg-8">
+                                    <select class="form-control" name="claimStatusid"
+                                            ng-model="vm.item.claimStatusID" ng-options="opt.statusID as opt.name for opt in vm.item.listStatus" ng-change="vm.selectStatus()" required></select>
+                                </div>
+                            </div>
+                            <div class="form-group" ng-class="{ 'has-error' : claimForm.followUpid.$invalid}">
+                                <label class="control-label col-lg-4">@L("FollowUp")</label>
+                                <div class="col-lg-8">
+                                    <select class="form-control" name="followUpid"
+                                            ng-model="vm.item.followUpID" ng-options="opt.followUpID as opt.name for opt in vm.item.listFollowUp" ng-change="vm.selectFollowUp()" required></select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-4">@L("Reserve")</label>
+                                <div class="col-lg-7">
+                                    <input type="text" class="form-control text-right" ng-model="vm.item.reserve" maxlength="100" sg-number-input>
+
+                                </div>
+                                <label class="control-label col-md-1" style="padding-left:0px; float:right">@L("VND")</label>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="control-label col-md-4">@L("DateRecentCorres")</label>
+                                <div class="col-lg-8">
+                                    <input type="text" name="drc" id="recentCorrespondence" class="form-control" ng-model="vm.item.recentCorrespondence" maxlength="10">
+                                </div>
+                            </div> 
+                        </div>
+
+                        <div class="col-lg-6 col-md-6 col-sm-6 form-horizontal">
+                            <div class="form-group" ng-class="{ 'has-error' : claimForm.dateOfSurvey.$invalid}">
+                                <label class="control-label col-md-4">@L("DateOfSurvey")</label>
+                                <div class="col-lg-8">
+                                    <input type="text" name="dos" id="dateofsurvey" class="form-control" ng-model="vm.item.dateOfSurvey" maxlength="10">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-4">@L("DateOfReport")</label>
+                                <div class="col-lg-8">
+                                    <input type="text" name="dor" id="dateofreport" class="form-control" ng-model="vm.item.dateOfReport" maxlength="10">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-4">@L("OtherStatus")</label>
+                                <div class="col-lg-8">
+                                    <input disabled type="text" class="form-control" id="otherStatus" ng-model="vm.item.otherStatus" maxlength="100">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-4">@L("OtherFollowUp")</label>
+                                <div class="col-lg-8">
+                                    <input disabled id="otherFollowUp" type="text" class="form-control" ng-model="vm.item.otherFollowUp" maxlength="100">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-4">@L("ProgressPayment")</label>
+                                <div class="col-lg-7">
+                                    <input type="text" class="form-control text-right" ng-model="vm.item.progressPayment" maxlength="50" sg-number-input>
+                                </div>
+                                <label class="control-label col-md-1" style="padding-left:0px; float:right">@L("VND")</label>
+                            </div>
+                           
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="form-actions">
+                    <div class="row">
+                        <div class="text-center">
+                            <button type="submit" ng-disabled="claimForm.claimID.$invalid || claimForm.claimStatusid.$invalid || claimForm.followUpid.$invalid" class="btn btn-primary blue" ng-click="vm.save($event)">
+                                @L("Save")
+                            </button>
+                            <button type="reset" class="btn btn-primary blue">
+                                @L("Reset")
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="portlet-body">
+            <br />
+            <table class="table table-striped table-bordered table-hover no-footer" busy-if="vm.loading" data-click-to-select="true">
+                <thead role="row">
+                    <tr>
+                        <th class="text-center">@L("DateOfSurvey")</th>
+                        <th class="text-center">@L("IssuedReport")</th>
+                        <th class="text-center">@L("Reserve")</th>
+                        <th class="text-center">@L("DateOfReport")</th>
+                        <th class="text-center">@L("Status")</th>
+                        <th class="text-center">@L("FollowUp")</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="cause in vm.item.history">
+                        <td class="text-center">{{cause.dateOfSurvey | date:'dd/MM/yyyy'}}</td>
+                        <td class="text-center">{{cause.reportName}}</td>
+                        <td class="text-center">{{cause.reserve | number : 0}}</td>
+                        <td class="text-center">{{cause.dateOfReport | date:'dd/MM/yyyy'}}</td>
+                        <td class="text-center">{{cause.statusName}}</td>
+                        <td class="text-center">{{cause.followUp}}</td>
+                    </tr>
+                    <tr ng-show="!vm.item.history || vm.item.history.length == 0">
+                        <td colspan="15">@L("NoRecords")</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,25 @@
+<div>
+    <form name="exampleForm" role="form" novalidate class="form-validation">
+        <div class="modal-header">
+            <button type="button" class="close" ng-click="vm.cancel()">&times;</button>
+            <h4 class="modal-title">
+                <span ng-if="vm.item.id">Edit</span>
+                <span ng-if="!vm.item.id">Create</span>
+            </h4>
+        </div>
+        <div class="modal-body">
+            <div class="form-group form-md-line-input form-md-floating-label no-hint">
+                <input class="form-control" type="text" name="Name" ng-model="vm.item.code" maxlength="5" required  ng-readonly="vm.editing" autofocus>
+                <label>Type</label>
+            </div>
+            <div class="form-group form-md-line-input form-md-floating-label no-hint">
+                <input class="form-control" type="text"  ng-class="{'edited':vm.item.name}" name="Name" ng-model="vm.item.name" required maxlength="100">
+                <label>Description</label>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button ng-disabled="vm.saving" type="button" class="btn btn-default" ng-click="vm.cancel()">@L("Cancel")</button>
+            <button type="submit" button-busy="vm.saving" busy-text="@L("SavingWithThreeDot")" class="btn btn-primary blue" ng-click="vm.save()" ng-disabled="exampleForm.$invalid"><i class="fa fa-save"></i> <span>@L("Save")</span></button>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="RevenueWIPDS" targetNamespace="http://tempuri.org/RevenueWIPDS.xsd" xmlns:mstns="http://tempuri.org/RevenueWIPDS.xsd" xmlns="http://tempuri.org/RevenueWIPDS.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="RevenueWIPDS" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="RevenueWIPDS" msprop:Generator_UserDSName="RevenueWIPDS">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="RevenueWIPTBL" msprop:Generator_TableClassName="RevenueWIPTBLDataTable" msprop:Generator_TableVarName="tableRevenueWIPTBL" msprop:Generator_TablePropName="RevenueWIPTBL" msprop:Generator_RowDeletingName="RevenueWIPTBLRowDeleting" msprop:Generator_RowChangingName="RevenueWIPTBLRowChanging" msprop:Generator_RowEvHandlerName="RevenueWIPTBLRowChangeEventHandler" msprop:Generator_RowDeletedName="RevenueWIPTBLRowDeleted" msprop:Generator_UserTableName="RevenueWIPTBL" msprop:Generator_RowChangedName="RevenueWIPTBLRowChanged" msprop:Generator_RowEvArgName="RevenueWIPTBLRowChangeEvent" msprop:Generator_RowClassName="RevenueWIPTBLRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ClaimID" msprop:Generator_ColumnVarNameInTable="columnClaimID" msprop:Generator_ColumnPropNameInRow="ClaimID" msprop:Generator_ColumnPropNameInTable="ClaimIDColumn" msprop:Generator_UserColumnName="ClaimID" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="25" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Timesheetname" msprop:Generator_ColumnVarNameInTable="columnTimesheetname" msprop:Generator_ColumnPropNameInRow="Timesheetname" msprop:Generator_ColumnPropNameInTable="TimesheetnameColumn" msprop:Generator_UserColumnName="Timesheetname" type="xs:string" minOccurs="0" />
+              <xs:element name="Insurrer" msprop:Generator_ColumnVarNameInTable="columnInsurrer" msprop:Generator_ColumnPropNameInRow="Insurrer" msprop:Generator_ColumnPropNameInTable="InsurrerColumn" msprop:Generator_UserColumnName="Insurrer" type="xs:string" minOccurs="0" />
+              <xs:element name="Insurred" msprop:Generator_ColumnVarNameInTable="columnInsurred" msprop:Generator_ColumnPropNameInRow="Insurred" msprop:Generator_ColumnPropNameInTable="InsurredColumn" msprop:Generator_UserColumnName="Insurred" type="xs:string" minOccurs="0" />
+              <xs:element name="NetFeeAMT" msprop:Generator_ColumnVarNameInTable="columnNetFeeAMT" msprop:Generator_ColumnPropNameInRow="NetFeeAMT" msprop:Generator_ColumnPropNameInTable="NetFeeAMTColumn" msprop:Generator_UserColumnName="NetFeeAMT" type="xs:decimal" minOccurs="0" />
+              <xs:element name="ExpenseAMT" msprop:Generator_ColumnVarNameInTable="columnExpenseAMT" msprop:Generator_ColumnPropNameInRow="ExpenseAMT" msprop:Generator_ColumnPropNameInTable="ExpenseAMTColumn" msprop:Generator_UserColumnName="ExpenseAMT" type="xs:decimal" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

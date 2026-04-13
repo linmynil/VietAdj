@@ -1,0 +1,13 @@
+<div>
+    <form name="exampleForm" role="form" novalidate class="form-validation">
+        <div class="modal-header">
+            <h4 class="modal-title">
+                <span ng-if="vm.mode == 'create'">@L("CreatedSuccessfully"): {{vm.item}} </span>
+                <span ng-if="vm.mode == 'edit'">@L("UpdatedSuccessfully"): {{vm.item}} </span>
+            </h4>
+        </div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-primary blue" ng-click="vm.redirect()"><span>@L("OK")</span></button>
+        </div>
+    </form>
+</div>

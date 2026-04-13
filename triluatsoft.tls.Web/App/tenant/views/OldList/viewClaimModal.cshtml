@@ -1,0 +1,143 @@
+<div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <form novalidate class="modal-form">
+            <div class="modal-header">
+                <button type="button" class="close" ng-click="vm.close()">&times;</button>
+                <h4 class="modal-title">
+                    <span>View {{vm.item.id}}</span>
+                </h4>
+            </div>
+            <div class="modal-body col-md-12">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">                            
+                            <label class="col-md-3">@L("Office")</label>
+                            <label>{{vm.item.officeName}}</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="col-md-3">@L("AccountManager")</label>
+                            <label>{{vm.item.accManName}}</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="col-md-3">@L("DateOfAssignment")</label>
+                            {{vm.item.dateOfAssignment  | date:'dd/MM/yyyy'}}
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="col-md-3">@L("Status")</label>
+                            {{vm.item.refStatusName}}
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="col-md-3">@L("Insurer")</label>
+                            {{vm.item.insurerName}}
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="col-md-3">@L("Broker")</label>
+                            {{vm.item.brokerName}}
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="col-md-3">@L("PolicyNo")</label>
+                            {{vm.item.policyNo}}
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="col-md-3">@L("TheInsured")</label>
+                            {{vm.item.theInsured}}
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="col-md-3">@L("TypeOfClaim")</label>
+                            {{vm.item.claimTypeCode}}
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="col-md-3">@L("TypeOfLoss")</label>
+                            {{vm.item.lossName}}
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="col-md-3">@L("CauseOfLoss")</label>
+                            {{vm.item.causeName}}
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="col-md-3">@L("OtherCause")</label>
+                            {{vm.item.otherCause}}
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="col-md-3">@L("EstimateOfLoss")</label>
+                            {{vm.item.estimate}} {{vm.item.currency}}
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="col-md-3">@L("CoOwnerInsurer")</label>
+                            <div class="col-md-6" style="padding-left:0">
+                            <select class="form-control" ng-size="vm.coOwners.length" multiple="multiple" ng-model="vm.coOwners" ng-options="opt.id as opt.brandName for opt in vm.item.coOwners"></select>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="col-md-3">@L("AE")</label>
+
+                            <div class="col-md-6" style="padding-left:0">
+                                <select class="form-control" size="4" multiple="multiple" ng-model="vm.aEs" ng-options="opt.employeeId as opt.name for opt in vm.item.aEs"></select>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+            </div>
+             @*end div modal body*@
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary blue" ng-click="vm.close()"><span>@L("Close")</span></button>
+            </div>
+        </form>
+    </div>
+</div>

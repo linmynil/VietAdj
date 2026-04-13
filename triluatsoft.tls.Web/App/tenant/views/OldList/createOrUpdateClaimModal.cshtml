@@ -1,0 +1,163 @@
+<div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <form novalidate class="modal-form">
+            <div class="modal-header">
+                <button type="button" class="close" ng-click="vm.cancel()">&times;</button>
+                <h4 class="modal-title">
+                    <span ng-if="vm.editing">Edit</span>
+                    <span ng-if="vm.viewing">View</span>
+                    <span ng-if="!vm.item.id">Create</span>
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group form-md-line-input form-md-floating-label no-hint">
+                            <select class="form-control input-xlarge"
+                                    ng-model="vm.item.office">
+                                <option value="1">SG</option>
+                                <option value="2">HN</option>
+
+                            </select>
+                            <label>@L("Office")</label>
+                        </div>
+                    </div>
+
+                    <div class='col-sm-6'>
+                        <div class="form-group form-md-line-input no-hint">
+                            <input type="date" class="form-control input-xlarge" ng-model="vm.dateOfAssignment">
+                            <label>@L("Date Of Assignment")</label>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group form-md-line-input form-md-floating-label no-hint">
+                            <select class="form-control input-xlarge"
+                                    ng-model="vm.item.insurer" ng-options="opt.id as opt.name for opt in vm.listInsureres" ng-readonly="vm.viewing" ng-class="{'edited':vm.listInsureres}"></select>
+                            <label>@L("Insurer")</label>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group form-md-line-input no-hint">
+                            <input type="date" class="form-control input-xlarge" ng-model="vm.item.dateOfLoss" />
+                            <label>@L("DateOfLoss")</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group form-md-line-input form-md-floating-label no-hint">
+                            <input class="form-control" type="text" name="theInsured" ng-model="vm.item.theInsured" required maxlength="100" ng-readonly="vm.viewing">
+                            <label>@L("TheInsured")</label>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group form-md-line-input form-md-floating-label no-hint">
+                            <select class="form-control input-xlarge"
+                                    ng-model="vm.item.causeOfLoss" ng-options="opt.code as opt.code for opt in vm.listCauses" ng-readonly="vm.viewing" ng-class="{'edited':vm.listCauses}"></select>
+                            <label>@L("CauseOfLoss")</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group form-md-line-input form-md-floating-label no-hint">
+                            <input class="form-control" type="text" name="theInsured" ng-model="vm.item.theInsured" required maxlength="100" ng-readonly="vm.viewing">
+                            <label>@L("InsuredProject")</label>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group form-md-line-input form-md-floating-label no-hint">
+                            <input class="form-control" type="text" ng-model="vm.item.otherCause" required maxlength="100" ng-readonly="vm.viewing">
+                            <label>@L("OtherCause")</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group form-md-line-input form-md-floating-label">
+                            <select class="form-control input-xlarge"
+                                    ng-model="vm.item.claimTypeCode" ng-options="opt.code as opt.code for opt in vm.listClaimTypes" ng-readonly="vm.viewing" ng-class="{'edited':vm.listClaimTypes}"></select>
+
+                            <label>@L("TypeOfClaim")</label>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group form-md-line-input no-hint">
+                            <input class="form-control" type="text" name="est" ng-model="vm.item.est" required maxlength="100" ng-readonly="vm.viewing">
+                            <label>@L("EstimateOfLoss")</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group form-md-line-input form-md-floating-label no-hint">
+                            <input class="form-control" type="text" ng-model="vm.item.policyNo" required maxlength="100" ng-readonly="vm.viewing">
+                            <label>@L("PolicyNo")</label>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group form-md-line-input form-md-floating-label no-hint">
+                            <input class="form-control" type="text" ng-model="vm.item.insurerRef" required maxlength="100" ng-readonly="vm.viewing">
+                            <label>@L("InsurersRef")</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group form-md-line-input form-md-floating-label no-hint">
+                            <input class="form-control" type="text" ng-model="vm.item.riskLocation" required maxlength="100" ng-readonly="vm.viewing">
+                            <label>@L("RiskLocation")</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 center-block">
+                        Co-owner Insurer
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-5">
+                        <select name="from" id="multiselect" class="form-control" size="8" multiple="multiple">
+                            <option value="1">C++</option>
+                            <option value="2">C#</option>
+                            <option value="3">Haskell</option>
+                            <option value="4">Java</option>
+                            <option value="5">JavaScript</option>
+                            <option value="6">Lisp</option>
+                            <option value="7">Lua</option>
+                            <option value="8">MATLAB</option>
+                            <option value="9">NewLISP</option>
+                            <option value="10">PHP</option>
+                            <option value="11">Perl</option>
+                            <option value="12">SQL</option>
+                            <option value="13">Unix shell</option>
+                        </select>
+                    </div>
+                    <div class="col-xs-2">
+                        <button type="button" id="multiselect_rightAll" class="btn btn-block hidden"><i class="glyphicon glyphicon-forward"></i></button>
+                        <button type="button" id="multiselect_rightSelected" class="btn btn-block"><i class="glyphicon glyphicon-chevron-right"></i></button>
+                        <button type="button" id="multiselect_leftSelected" class="btn btn-block"><i class="glyphicon glyphicon-chevron-left"></i></button>
+                        <button type="button" id="multiselect_leftAll" class="btn btn-block hidden"><i class="glyphicon glyphicon-backward"></i></button>
+                    </div>
+                    <div class="col-xs-5">
+                        <select name="to" id="multiselect_to" class="form-control" size="8" multiple="multiple"></select>
+                    </div>
+                </div>
+            </div>@*end div modal body*@
+            <div class="modal-footer">
+                <button ng-disabled="vm.saving" type="button" class="btn btn-default" ng-click="vm.cancel()">@L("Cancel")</button>
+                <button type="submit" button-busy="vm.saving" busy-text="@L("SavingWithThreeDot")" class="btn btn-primary blue" ng-click="vm.save()" ng-disabled="exampleForm.$invalid"><i class="fa fa-save"></i> <span>@L("Save")</span></button>
+            </div>
+        </form>
+    </div>
+</div>

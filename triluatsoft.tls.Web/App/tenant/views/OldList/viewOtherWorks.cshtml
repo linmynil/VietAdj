@@ -1,0 +1,136 @@
+﻿<div ng-controller="tenant.views.OldList.viewOtherWorks as vm">
+    <div class="row margin-bottom-5">
+        <div class="col-xs-6">
+            <div class="page-head">
+                <div class="page-title">
+                    <h1>
+                        <span>@L("OtheWorks")</span>
+                    </h1>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-6 text-right">
+            <a class="btn btn-primary blue" ng-click="vm.openModal(null)"><i class="fa fa-plus"></i>@L("Create")</a>
+        </div>
+    </div>
+    <div class="portlet light margin-bottom-0">
+        <div class="portlet-body">
+            <form action="#" class="form-horizontal form-row-sepe ng-pristine ng-valid" busy-if="vm.loadingDate">
+                <div class="form-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    @L("DateRange")
+                                </label>
+                                <div class="col-md-4">
+                                    <input date-range-picker type="text" options="vm.dateRangeOptions" min="vm.dateRangeOptions.min" max="vm.dateRangeOptions.max" class="form-control date-picker input-large" ng-model="vm.dateRangeModel" />
+
+                                </div>
+                            </div>
+                        </div>
+                       
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    @L("Employee")
+                                </label>
+                                <div class="col-md-4">
+                                    <select class="form-control input-large" ng-model="vm.searchdata.employeeID" ng-options="emp.employeeId as emp.name for emp in vm.listEmployees">
+                                        <option selected value="">All</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group" style="margin-bottom:0px">
+                                <label class="col-md-3 control-label">Adjustment</label>
+                                <div class="col-md-9">
+                                    <div class="mt-radio-inline">
+                                        <label class="mt-radio">
+                                            <input type="radio" name="optionsRadios1" id="optionsRadios1" ng-model="vm.searchdata.debitOrCredit" value="true">
+                                            @L("ConAdded")
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-radio">
+                                            <input type="radio" name="optionsRadios1" id="optionsRadios1" ng-model="vm.searchdata.debitOrCredit" value="false">
+                                            @L("ConLess")
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-radio">
+                                            <input checked type="radio" spellcheck="true" name="optionsRadios1" id="optionsRadios1" ng-model="vm.searchdata.debitOrCredit" value="" >
+                                            @L("All")
+                                            <span></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <div class="row">
+                        <div class="col-md-offset-5 col-md-9">
+                            <button type="submit" ng-disabled="vm.loading" class="btn btn-primary blue" ng-click="vm.search($event)">
+                                @L("Search")
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <br />
+            <table class="table table-striped table-bordered table-hover no-footer" busy-if="vm.loading" data-click-to-select="true">
+                <thead role="row">
+                    <tr>
+                        <th class="text-center">@L("LossAdjusters")</th>
+                        <th class="text-center">@L("Date")</th>
+                        <th class="text-center">@L("Amount")</th>
+                        <th class="text-center">@L("Description")</th>
+                        <th class="text-center" style="width:100px">@L("Actions")</th>
+                    </tr>
+                    @*<tr>
+                <td class="text-left">PHUNG ANH TUNG</td>
+                <td class="text-center">27-04-2017</td>
+                <td class="text-right">- 14,300,000,000</td>
+                <td class="text-left">chuyển contribution sang năm 2017</td>
+                <td class="text-center">
+                    <button ng-click="vm.openModal(cause, 'edit')" title="@L("Edit")" class="btn btn-circle btn-icon-only blue delete-person" href="javascript:;" style="margin-right:0px;margin-right:0px">
+                        <i class="icon-pencil"></i>
+                    </button>
+                    <button ng-click="vm.deleteOtherWorks()" title="@L("Delete")" class="btn btn-circle btn-icon-only red delete-person" href="javascript:;" style="margin-right:0px;margin-left:0px">
+                        <i class="icon-trash"></i>
+                    </button>
+                </td>
+            </tr>*@
+                </thead>
+                <tbody>
+                    <tr ng-repeat="otherWorks in vm.list">
+                        <td class="text-left">{{otherWorks.employeeName}}</td>
+                        <td class="text-center">{{otherWorks.adjustDate| date: 'dd-MM-yyyy'}}</td>
+                        <td class="text-right">{{otherWorks.adjustAMT | number : 0}}</td>
+                        <td class="text-left">{{otherWorks.description}}</td>
+                        <td class="text-center">
+                            <button ng-click="vm.deleteOtherWorks(otherWorks.id)" title="@L("Delete")" class="btn btn-circle btn-icon-only red delete-person" href="javascript:;" style="margin-right:0px;margin-left:0px">
+                                <i class="icon-trash"></i>
+                            </button>
+                            <button ng-click="vm.openModal(otherWorks)" title="@L("Edit")" class="btn btn-circle btn-icon-only blue" href="javascript:;">
+                                <i class="icon-pencil"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr ng-show="vm.list.length == 0">
+                        <td colspan="15">@L("NoRecords")</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="row">
+                <div class="col-md-7">
+                    <ul boundary-link-numbers="true" class="margin-top-0" uib-pagination total-items="vm.totalCount" items-per-page="20" ng-model="vm.page" ng-change="vm.pageChanged()" max-size="5"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

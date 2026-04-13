@@ -1,0 +1,150 @@
+﻿<div>
+    <form name="form" role="form" class="form-validation">
+        <div class="panel-group">
+            <div class="modal-header">
+                <h3 style="color:#0285bd" ;padding-top:3%;padding-left:3%">@L("Interim")</h3>
+            </div>
+            <div class="modal-body">
+
+                <div class="row form-group">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-3">
+                                @L("ClaimRef")
+                            </label>
+                            <div class="col-md-9">
+                                <label>{{vm.claimID}}</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-3">
+                                @L("Insurer")
+                            </label>
+                            <div class="col-md-9">
+                                <label>{{vm.customerName}}</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-6">
+                        <div class="form-group" ng-class="{ 'has-error' : form.invoiceNo.$invalid}">
+                            <label class="control-label col-md-3">
+                                @L("InvoiceNo")
+                            </label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" name="invoiceNo"
+                                       ng-model="vm.invoiceCode" required maxlength="25">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-3">
+                                @L("Subtotal")
+                            </label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control text-right" sg-number-input id="subtotal" ng-model="vm.subtotal" disabled>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-6">
+                        <div class="form-group" ng-class="{ 'has-error' : form.invoiceDate.$invalid}">
+                            <label class="control-label col-md-3" style="margin-top:0">
+                                @L("InvoiceDate")
+                            </label>
+                            <div class="col-md-9">
+                                <input type="text" name="invoiceDate" id="invoiceDate" class="form-control" ng-model="vm.invoiceDate">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-3">
+                                @L("VAT")
+                            </label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control text-right" id="tax" ng-model="vm.vat" sg-number-input disabled>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-6">
+                        <div class="form-group" ng-class="{ 'has-error' : form.fee.$invalid}">
+                            <label class="control-label col-md-3">
+                                @L("Fee")
+                            </label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control text-right" id="fee" name="fee"
+                                       ng-model="vm.fee" required sg-number-input
+                                       ng-blur="vm.calc()" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-3">
+                                @L("Total")
+                            </label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control text-right" sg-number-input id="total" ng-model="vm.total" disabled>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-6">
+                        <div class="form-group" ng-class="{ 'has-error' : form.fee.$invalid}">
+                            <label class="control-label col-md-3">
+                                @L("Expenses")
+                            </label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control text-right" 
+                                       id="expense" ng-model="vm.expense" required 
+                                       sg-number-input
+                                       ng-blur="vm.calc()">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-3">
+                                @L("NonVAT")
+                            </label>
+                            <div class="col-md-6">
+                                <label class="mt-checkbox" style="margin-top:10px">
+                                    <input type="checkbox" name="nonVAT" id="nonVAT" ng-model="vm.nonVAT"
+                                           ng-checked="vm.calc()" />
+                                    <span></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-3">
+                                @L("Remark")
+                            </label>
+                            <div class="col-md-9">
+                                <textarea type="text" class="form-control" ng-model="vm.remark" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" ng-click="vm.cancel()">@L("Cancel")</button>
+            <button type="submit" class="btn btn-primary blue" ng-click="vm.save()" ng-disabled="vm.saving || form.$invalid"><i class="fa fa-save"></i> <span>@L("Save")</span></button>
+
+        </div>
+    </form>
+</div>

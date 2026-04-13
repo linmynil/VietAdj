@@ -1,0 +1,155 @@
+﻿<div ng-controller="tenant.views.OldList.ViewFirstRef as vm">
+    <div class="row margin-bottom-5">
+        <div class="col-xs-6">
+            <div class="page-head">
+                <div class="page-title">
+                    <h1>
+                        <span>@L("FirstRef")</span>
+                    </h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="portlet light margin-bottom-0">
+        <div class="portlet-body">
+            <form action="#" class="form-horizontal form-row-sepe ng-pristine ng-valid" busy-if="vm.loadingDate">
+                <div class="form-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    @L("Office")
+                                </label>
+                                <div class="col-md-4">
+                                    <select class="form-control input-large"
+                                            ng-model="vm.officeID" ng-change="vm.officeChanged()">                                        
+                                        <option selected="selected" value="1">SG</option>
+                                        <option value="2">HN</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    @L("Year")
+                                </label>
+                                <div class="col-md-4">
+                                    <select class="form-control input-large"
+                                            ng-model="vm.syearVal">
+                                        <option selected="selected" value="">---Select Year---</option>
+                                        <option value="2010">2010</option>
+                                        <option value="2011">2011</option>
+                                        <option value="2012">2012</option>
+                                        <option value="2013">2013</option>
+                                        <option value="2014">2014</option>
+                                        <option value="2015">2015</option>
+                                        <option value="2016">2016</option>
+                                        <option value="2017">2017</option>
+                                        <option value="2018">2018</option>
+                                        <option value="2019">2019</option>
+                                        <option value="2020">2020</option>
+                                        <option value="2021">2021</option>
+                                        <option value="2022">2022</option>
+                                        <option value="2023">2023</option>
+                                        <option value="2024">2024</option>
+                                        <option value="2025">2025</option>
+                                        <option value="2026">2026</option>
+                                        <option value="2027">2027</option>
+                                        <option value="2028">2028</option>
+                                        <option value="2029">2029</option>
+                                        <option value="2030">2030</option>
+                                        <option value="2031">2031</option>
+                                        <option value="2032">2032</option>
+                                        <option value="2033">2033</option>
+                                        <option value="2034">2034</option>
+                                        <option value="2035">2035</option>
+                                        <option value="2036">2036</option>
+                                        <option value="2037">2037</option>
+                                        <option value="2038">2038</option>
+                                        <option value="2039">2039</option>
+                                        <option value="2040">2040</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    @L("FirstRef")
+                                </label>
+                                <div class="col-md-4">
+                                    <input type="text" class="form-control input-large" ng-model="vm.firstRefVal" maxlength="20">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-actions">
+                    <div class="row">
+                        <div class="col-md-offset-5 col-md-9">
+                            <button type="submit" ng-disabled="vm.loading" class="btn btn-primary blue" ng-click="vm.addRef()">
+                                @L("Add")
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <br />
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="panel-title">@L("PleaseActiveAYear")</div>
+                </div>
+                <table class="table table-striped table-bordered table-hover no-footer" busy-if="vm.loading" data-click-to-select="true">
+                    <thead role="row">
+                        <tr>
+                            <th class="text-center">@L("OfficeName")</th>
+                            <th class="text-center">@L("Year")</th>
+                            <th class="text-center">@L("FirstRef")</th>
+                            <th class="text-center">@L("Activate")</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in vm.list">
+                            <td class="text-center">
+                                <div ng-if="item.officeID == 1">SG</div>
+                                <div ng-if="item.officeID == 2">HN</div>
+                            </td>
+                            <td class="text-center">{{item.sYear}}</td>
+                            <td class="text-center">{{item.initialCode}}</td>
+                            <td class="text-center">
+                                <label class="mt-radio">
+                                    <input type="radio" ng-model="item.isActive" ng-checked="{{item.isActive}}" name="isActive_group" ng-change="vm.activeChange(item)">
+                                    <span></span>
+                                </label>
+                            </td>                            
+                        </tr>
+                        <tr ng-show="vm.list.length == 0">
+                            <td colspan="4">@L("NoRecords")</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="form-actions">
+                <div class="row">
+                    <div class="col-md-offset-5 col-md-9">
+                        <button type="submit" ng-disabled="vm.loading" class="btn btn-primary blue" ng-click="vm.activeRef()">
+                            @L("Activate")
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!--
+            <div class="row">
+                <div class="col-md-7">
+                    <ul boundary-link-numbers="true" class="margin-top-0" uib-pagination total-items="vm.totalCount" items-per-page="20" ng-model="vm.page" ng-change="vm.pageChanged()" max-size="5"></ul>
+                </div>
+            </div> -->
+        </div>
+    </div>
+</div>

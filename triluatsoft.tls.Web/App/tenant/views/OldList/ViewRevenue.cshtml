@@ -1,0 +1,179 @@
+<div ng-controller="tenant.views.OldList.ViewRevenue as vm">
+    <div class="row margin-bottom-5">
+        <div class="col-xs-6">
+            <div class="page-head">
+                <div class="page-title">
+                    <h1>
+                        <span>@L("Revenue")</span>
+                    </h1>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="portlet light margin-bottom-0">
+        <div class="portlet-body">
+            <form action="#" class="form-horizontal form-row-sepe ng-pristine ng-valid">
+                <div class="form-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    @L("DateRange")
+                                </label>
+                                <div class="col-md-4">
+                                    <input date-range-picker type="text" options="vm.dateRangeOptions" min="vm.dateRangeOptions.min" max="vm.dateRangeOptions.max" class="form-control date-picker input-large" ng-model="vm.dateRangeModel" />
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6" style="padding-left:0px">
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">@L("Office")</label>
+                                <div class="col-md-4">
+                                    <select class="form-control input-large"
+                                            ng-model="vm.searchdata.officeID">
+                                        <option selected="selected" value="">All</option>
+                                        <option value="1">SG</option>
+                                        <option value="2">HN</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    @L("ClaimRef")
+                                </label>
+                                <div class="col-md-4">
+                                    <input type="text" class="form-control input-large" ng-model="vm.searchdata.claimID" maxlength="25">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group" style="margin-bottom:0px">
+                                <label class="col-md-3 control-label">@L("Insurer")</label>
+
+                                <select class="form-control input-large"
+                                        ng-model="vm.searchdata.insurerID" ng-options="opt.id as opt.name for opt in vm.listInsureres">
+                                    <option selected value="">All</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    @L("InvoiceNo")
+                                </label>
+                                <div class="col-md-4">
+                                    <input type="text" class="form-control input-large" ng-model="vm.searchdata.invoiceCode" maxlength="100">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">@L("Broker")</label>
+                                <select class="form-control input-large"
+                                        ng-model="vm.searchdata.brokerID" ng-options="opt.id as opt.name for opt in vm.listBrokers">
+                                    <option selected value="">All</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">@L("InvoiceType")</label>
+                                <div class="col-md-9">
+                                    <div class="mt-radio-inline">
+                                        <label class="mt-radio">
+                                            <input type="radio" name="optionsRadios" id="optionsRadios1" value="INTERIM" ng-model="vm.searchdata.invoiceType">
+                                            Interim
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-radio">
+                                            <input type="radio" name="optionsRadios" id="optionsRadios1" value="TIMESHEET" ng-model="vm.searchdata.invoiceType">
+                                            Timesheet
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-radio">
+                                            <input checked type="radio" name="optionsRadios" id="optionsRadios1" value="ALL" ng-model="vm.searchdata.invoiceType" ng-checked="!vm.searchdata.invoiceType">
+                                            All
+                                            <span></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <div class="row">
+                        <div class="col-md-offset-5 col-md-9">
+                            <button type="submit" ng-disabled="vm.loading" class="btn btn-primary blue" ng-click="vm.searchLogs($event)">
+                                @L("Search")
+                            </button>
+                            <button type="reset" class="btn btn-primary blue" ng-click="vm.reset()">
+                                @L("Reset")
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <br />
+            <table class="table table-striped table-bordered table-hover no-footer" busy-if="vm.loading" data-click-to-select="true">
+                <thead role="row">
+                    <tr style="background-color:lightblue;">
+                        <th class="text-center">Rows</th>
+                        <th class="text-center">Fee</th>
+                        <th class="text-center">Expenses</th>
+                        <th class="text-center">Subtotal</th>                        
+                    </tr>
+                </thead>
+                <tr>
+                    <td class="text-center bold">{{vm.totalCount}}</td>
+                    <td class="text-center bold">{{vm.totalNetCost | number:0}}</td>
+                    <td class="text-center bold">{{vm.totalExpense | number:0}}</td>
+                    <td class="text-center bold">{{vm.totalRevenue | number:0}}</td>
+                </tr>
+            </table>            
+            <table class="table table-striped table-bordered table-hover no-footer" busy-if="vm.loading" data-click-to-select="true">
+                <thead role="row">
+                    <tr style="background-color:lightblue;">
+                        <th class="text-center">@L("ClaimRef")</th>
+                        <th class="text-center">@L("Insurer")</th>
+                        <th class="text-center">@L("InvoiceNo")</th>
+                        <th class="text-center">@L("Date")</th>
+                        <th class="text-center">@L("Fee")</th>
+                        <th class="text-center">@L("Expenses")</th>
+                        <th class="text-center">@L("Subtotal")</th>
+                    </tr>
+                </thead>
+                <tr ng-repeat="item in vm.list">
+                    <td class="text-left">{{item.claimID}}</td>
+                    <td class="text-left">{{item.customerName}}</td>
+                    <td class="text-right"><a ng-click="vm.openModalDetailInvoiceNo(item.invoiceID)">{{item.invoiceCode}}</a></td>
+                    <td class="text-center">{{item.invoiceDate | date:'dd-MM-yyyy'}}</td>
+                    <td class="text-right">{{item.proFeeGrandAMT | number: 0}}</td>
+                    <td class="text-right">{{item.expenseAMT | number:0}}</td>
+                    <td class="text-right">{{item.revenueAMT | number:0}}</td>
+                </tr>
+                <tr ng-show="vm.list.length == 0">
+                    <td colspan="15">@L("NoRecords")</td>
+                </tr>
+
+            </table>
+            <div class="row">
+                <div class="col-md-7">
+                    <ul boundary-link-numbers="true" class="margin-top-0" uib-pagination total-items="vm.totalCount" items-per-page="20" ng-model="vm.page" ng-change="vm.pageChanged()" max-size="5"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

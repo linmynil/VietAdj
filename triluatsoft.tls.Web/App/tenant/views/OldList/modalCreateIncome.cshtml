@@ -1,0 +1,127 @@
+﻿<div>
+    <form name="formIN" role="form" class="form-validation">
+        <div class="panel-group">
+            <div class="modal-header">
+                <button type="button" class="close" ng-click="vm.cancel()">&times;</button>
+                <h4 class="modal-title">
+                    <span ng-if="vm.editing">@L("Edit")</span>
+                    <span ng-if="!vm.editing">@L("AddNew")</span>
+                </h4>
+            </div>
+            <div class="modal-body">
+              
+                <div class="row" style="margin-bottom:5px">
+                    <div class="col-md-6">
+                        <div class="form-group" ng-class="{ 'has-error' : formIN.employeev.$invalid}">
+                            <label class="control-label col-md-4" style="width:150px">
+                                @L("LossAdjusters")
+                            </label>
+                            <div class="col-md-4">
+                                <select name="employeev" class="form-control input-large" ng-model="vm.edititem.employeeID" ng-options="emp.employeeId as emp.name for emp in vm.listEmp" required>
+                                </select>                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-bottom:5px">
+                    <div class="col-md-6">
+                        <div class="form-group" ng-class="{ 'has-error' : formIN.datetimes.$invalid}">
+                            <label class="control-label col-md-4" style="width:150px">
+                                @L("Date")
+                            </label>
+                            <div class="col-md-4">
+                                <input type="text" id="createDateP" name="datetimes" class="form-control input-large" maxlength="20" ng-model="vm.edititem.date" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-bottom:5px">
+                    <div class="col-md-6">
+                        <div class="form-group" ng-class="{ 'has-error' : formOW.amount.$invalid}">
+                            <label class="control-label col-md-4" style="width:150px">
+                                @L("Amount")
+                            </label>
+                            <div class="col-md-4">
+                                <input name="amount" type="text" class="form-control input-large" maxlength="10" sg-number-input ng-model="vm.edititem.incomeAMT" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-bottom:5px">
+                    <div class="col-md-6">
+                        <div class="form-group" ng-class="{'has-error': formIN.intypev.$invalid}">
+                            <label class="control-label col-md-4" style="width:150px">
+                                @L("Type")
+                            </label>
+                            <div class="col-md-4">
+                                <select name="intypev" class="form-control input-large" ng-model="vm.edititem.incomeType" ng-options="type.id as type.incomeName for type in vm.typelist" required>                                    
+                                </select>                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-bottom:5px">
+                    <div class="col-md-10">
+                        <div class="form-group">
+                            <label class="control-label col-md-4" style="width:150px">
+                                @L("Contributed")
+                            </label>
+                            <div class="col-md-8">
+                                <div class="mt-radio-inline">
+                                    <div class="col-md-5" style="padding:0px">
+                                        <label class="mt-radio">
+                                            <input type="radio" name="optionsRadios1" id="optionsRadios1" ng-model="vm.edititem.contribution" ng-checked="vm.edititem.contribution" ng-value="true">
+                                            Yes
+                                            <span></span>
+                                        </label>
+                                    </div>
+                                    <div class="col-md-6" style="padding:0px">
+                                        <label class="mt-radio">
+                                            <input type="radio" name="optionsRadios1" id="optionsRadios1" ng-model="vm.edititem.contribution" ng-checked="!vm.edititem.contribution" ng-value="false">
+                                            No
+                                            <span></span>
+                                        </label>
+                                    </div>
+                                    </div> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-bottom:5px">
+                    <div class="col-md-6">
+                        <div class="form-group" ng-class="{'has-error': formIN.descriptionv.$invalid}">
+                            <label class="control-label col-md-4" style="width:150px">
+                                @L("Description")
+                            </label>
+                            <div class="col-md-4">
+                                <input type="text" name="descriptionv" class="form-control" style="width:320px" maxlength="100" ng-model="vm.edititem.description">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+               
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button ng-disabled="vm.saving" type="button" class="btn btn-default" ng-click="vm.cancel()">@L("Cancel")</button>
+                <button ng-disabled="formIN.$invalid" type="submit" class="btn btn-primary blue" ng-click="vm.save()"><i class="fa fa-save"></i> <span>@L("Save")</span></button>
+          
+            </div>
+        </form>
+    </div>
+<script>
+$(function() {
+  $('input[name="datetimes"]').daterangepicker({
+      singleDatePicker: true,
+      timePicker : true,
+      timePicker24Hour : true,
+      autoApply : true,
+      startDate: moment().startOf('hour'),
+      endDate: moment().startOf('hour').add(32, 'hour'),
+      locale: {
+         format: 'DD/MM/YYYY HH:mm'
+    }
+  });
+});
+</script>

@@ -1,0 +1,179 @@
+<div ng-controller="tenant.views.OldList.viewAccountsReceivableReport as vm">
+    <div class="row margin-bottom-5">
+        <div class="col-xs-6">
+            <div class="page-head">
+                <div class="page-title">
+                    <h1>
+                        <span>@L("AccountsReceivableReport")</span>
+                    </h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="portlet light margin-bottom-0">
+        <div class="portlet-body">
+            <form name="report" action="#" class="form-horizontal form-row-sepe ng-pristine ng-valid" busy-if="vm.loadingDate">
+                <div class="form-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group" ng-class="{ 'has-error' : report.fdate.$invalid}">
+                                <label class="control-label col-md-3">
+                                    @L("DateRange")
+                                </label>
+                                <div class="col-md-9">
+                                    <input name="fdate" date-range-picker type="text" options="vm.dateRangeOptions" min="vm.dateRangeOptions.min" max="vm.dateRangeOptions.max" class="form-control date-picker" ng-model="vm.dateRangeModel" id="dataRange" required />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group" style="margin-bottom:0px">
+                                <label class="col-md-3 control-label">@L("Language")</label>
+                                <div class="col-md-9">
+                                    <select class="form-control input-small" ng-model="vm.lang" ng-init="vm.lang='EN'" required>
+                                        <option value="EN">English</option>
+                                        <option value="VN">Vietnamese</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    @L("Office")
+                                </label>
+                                <div class="col-md-9">
+                                    <select class="form-control input-large"
+                                            ng-model="vm.officeID">
+                                        <option selected="selected" value="">All</option>
+                                        <option value="1">SG</option>
+                                        <option value="2">HN</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group" style="margin-bottom:0px">
+                                <label class="control-label col-md-3">
+                                    @L("Insurer")
+                                </label>
+                                <div class="col-md-9">
+                                    <select class="form-control input-large"
+                                            ng-model="vm.insurerID" ng-options="opt.id as opt.brandName for opt in vm.listInsureres">
+                                        <option selected value="">All</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    @L("ClaimRef")
+                                </label>
+                                <div class="col-md-9">
+                                    <input type="text" class="form-control" maxlength="25" ng-model="vm.claimID">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group" style="margin-bottom:0px">
+                                <label class="control-label col-md-3">
+                                    @L("Broker")
+                                </label>
+                                <div class="col-md-9">
+                                    <select class="form-control input-large"
+                                            ng-model="vm.brokerID" ng-options="opt.id as opt.brandName for opt in vm.listBrokers">
+                                        <option selected value="">All</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    @L("InvoiceNo")
+                                </label>
+                                <div class="col-md-9">
+                                    <input type="text" class="form-control" maxlength="100" ng-model="vm.invoiceCode">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group" style="margin-bottom:0px">
+                                <label class="col-md-3 control-label">@L("PaymentStatus")</label>
+                                <div class="col-md-9">
+                                    <div class="mt-radio-inline">
+                                        <label class="mt-radio">
+                                            <input type="radio" name="optionsRadios2" id="optionsRadios2" value=false ng-model="vm.isSettled">
+                                            Unpaid
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-radio">
+                                            <input type="radio" name="optionsRadios2" id="optionsRadios2" value=true ng-model="vm.isSettled">
+                                            Paid
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-radio">
+                                            <input checked type="radio" name="optionsRadios2" id="optionsRadios2" value="" ng-model="vm.isSettled" ng-checked="!vm.isSettled">
+                                            All
+                                            <span></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group" style="margin-bottom:0px">
+                                <label class="col-md-3 control-label">@L("InvoiceType")</label>
+                                <div class="col-md-9">
+                                    <div class="mt-radio-inline">
+                                        <label class="mt-radio">
+                                            <input type="radio" name="optionsRadios1" id="optionsRadios1" value=true ng-model="vm.isAdvInvoice">
+                                            Interim
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-radio">
+                                            <input type="radio" name="optionsRadios1" id="optionsRadios1" value=false ng-model="vm.isAdvInvoice">
+                                            Timesheet
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-radio">
+                                            <input checked type="radio" name="optionsRadios1" id="optionsRadios1" value="" ng-model="vm.isAdvInvoice" ng-checked="!vm.isAdvInvoice">
+                                            ALL
+                                            <span></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <div class="row">
+                        <div class="col-md-offset-5 col-md-9">                            
+                            <button type="submit" class="btn btn-primary blue" ng-disabled="report.$invalid"
+                                    ng-click="vm.printReport($event, 'inline')">
+                                @L("Search")
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <br />
+            <div class="row">
+                <div class="col-md-12" style="margin-left:5%">
+                    <iframe id="ReportFrame" src="" width="100%" height="1000" style="border:none"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="ProfeeDS" targetNamespace="http://tempuri.org/ProfeeDS.xsd" xmlns:mstns="http://tempuri.org/ProfeeDS.xsd" xmlns="http://tempuri.org/ProfeeDS.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="ProfeeDS" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="ProfeeDS" msprop:Generator_UserDSName="ProfeeDS">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="ProfeeTBL" msprop:Generator_TableClassName="ProfeeTBLDataTable" msprop:Generator_TableVarName="tableProfeeTBL" msprop:Generator_RowChangedName="ProfeeTBLRowChanged" msprop:Generator_TablePropName="ProfeeTBL" msprop:Generator_RowDeletingName="ProfeeTBLRowDeleting" msprop:Generator_RowChangingName="ProfeeTBLRowChanging" msprop:Generator_RowEvHandlerName="ProfeeTBLRowChangeEventHandler" msprop:Generator_RowDeletedName="ProfeeTBLRowDeleted" msprop:Generator_RowClassName="ProfeeTBLRow" msprop:Generator_UserTableName="ProfeeTBL" msprop:Generator_RowEvArgName="ProfeeTBLRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Date" msprop:Generator_ColumnVarNameInTable="columnDate" msprop:Generator_ColumnPropNameInRow="Date" msprop:Generator_ColumnPropNameInTable="DateColumn" msprop:Generator_UserColumnName="Date" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="Col1" msprop:Generator_ColumnVarNameInTable="columnCol1" msprop:Generator_ColumnPropNameInRow="Col1" msprop:Generator_ColumnPropNameInTable="Col1Column" msprop:Generator_UserColumnName="Col1" type="xs:string" minOccurs="0" />
+              <xs:element name="Description" msprop:Generator_ColumnVarNameInTable="columnDescription" msprop:Generator_ColumnPropNameInRow="Description" msprop:Generator_ColumnPropNameInTable="DescriptionColumn" msprop:Generator_UserColumnName="Description" type="xs:string" minOccurs="0" />
+              <xs:element name="Time_x0020__x0028_hh_x003A_mm_x0029_" msprop:Generator_ColumnVarNameInTable="_columnTime__hh_mm_" msprop:Generator_ColumnPropNameInRow="_Time__hh_mm_" msprop:Generator_ColumnPropNameInTable="_Time__hh_mm_Column" msprop:Generator_UserColumnName="Time (hh:mm)" type="xs:string" minOccurs="0" />
+              <xs:element name="Amount_x0020__x0028_VND_x0029_" msprop:Generator_ColumnVarNameInTable="_columnAmount__VND_" msprop:Generator_ColumnPropNameInRow="_Amount__VND_" msprop:Generator_ColumnPropNameInTable="_Amount__VND_Column" msprop:Generator_UserColumnName="Amount (VND)" type="xs:decimal" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

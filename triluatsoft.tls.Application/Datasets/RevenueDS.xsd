@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="RevenueDS" targetNamespace="http://tempuri.org/RevenueDS.xsd" xmlns:mstns="http://tempuri.org/RevenueDS.xsd" xmlns="http://tempuri.org/RevenueDS.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="RevenueDS" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="RevenueDS" msprop:Generator_UserDSName="RevenueDS">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="RevenueTBL" msprop:Generator_TableClassName="RevenueTBLDataTable" msprop:Generator_TableVarName="tableRevenueTBL" msprop:Generator_RowChangedName="RevenueTBLRowChanged" msprop:Generator_TablePropName="RevenueTBL" msprop:Generator_RowDeletingName="RevenueTBLRowDeleting" msprop:Generator_RowChangingName="RevenueTBLRowChanging" msprop:Generator_RowEvHandlerName="RevenueTBLRowChangeEventHandler" msprop:Generator_RowDeletedName="RevenueTBLRowDeleted" msprop:Generator_RowClassName="RevenueTBLRow" msprop:Generator_UserTableName="RevenueTBL" msprop:Generator_RowEvArgName="RevenueTBLRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Insurer" msprop:nullValue="_empty" msprop:Generator_ColumnPropNameInRow="Insurer" msprop:Generator_ColumnVarNameInTable="columnInsurer" msprop:Generator_ColumnPropNameInTable="InsurerColumn" msprop:Generator_UserColumnName="Insurer" type="xs:string" minOccurs="0" />
+              <xs:element name="ClaimID" msprop:nullValue="_empty" msprop:Generator_ColumnPropNameInRow="ClaimID" msprop:Generator_ColumnVarNameInTable="columnClaimID" msprop:Generator_ColumnPropNameInTable="ClaimIDColumn" msprop:Generator_UserColumnName="ClaimID" type="xs:string" minOccurs="0" />
+              <xs:element name="InvoiceDate" msprop:Generator_ColumnVarNameInTable="columnInvoiceDate" msprop:Generator_ColumnPropNameInRow="InvoiceDate" msprop:Generator_ColumnPropNameInTable="InvoiceDateColumn" msprop:Generator_UserColumnName="InvoiceDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="InvoiceCode" msprop:nullValue="_empty" msprop:Generator_ColumnPropNameInRow="InvoiceCode" msprop:Generator_ColumnVarNameInTable="columnInvoiceCode" msprop:Generator_ColumnPropNameInTable="InvoiceCodeColumn" msprop:Generator_UserColumnName="InvoiceCode" type="xs:string" minOccurs="0" />
+              <xs:element name="Fee" msprop:nullValue="0" msprop:Generator_ColumnPropNameInRow="Fee" msprop:Generator_ColumnVarNameInTable="columnFee" msprop:Generator_ColumnPropNameInTable="FeeColumn" msprop:Generator_UserColumnName="Fee" type="xs:decimal" minOccurs="0" />
+              <xs:element name="Expense" msprop:nullValue="0" msprop:Generator_ColumnPropNameInRow="Expense" msprop:Generator_ColumnVarNameInTable="columnExpense" msprop:Generator_ColumnPropNameInTable="ExpenseColumn" msprop:Generator_UserColumnName="Expense" type="xs:decimal" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

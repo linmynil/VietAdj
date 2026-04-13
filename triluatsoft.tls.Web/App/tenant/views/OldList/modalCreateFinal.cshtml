@@ -1,0 +1,177 @@
+﻿<div>
+    <form name="form" role="form" class="form-validation" novalidate>
+        <div class="panel-group">
+            <div class="modal-header">
+                <button type="button" class="close" ng-click="vm.cancel()">&times;</button>
+                <h3 style="color:#0285bd">@L("CreateFinalInvoice")</h3>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="control-label col-md-2">
+                                @L("ClaimRef")
+                            </label>
+                            <div class="col-md-9">
+                                <label>{{vm.claimID}}</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="control-label col-md-2">
+                                @L("Insurer")
+                            </label>
+                            <div class="col-md-9">
+                                <label>{{vm.customerName}}</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="control-label col-md-2">
+                                @L("NonVAT")
+                            </label>
+                            <div class="col-md-6">
+                                <label class="mt-checkbox">
+                                    <input type="checkbox" name="nonVAT" id="nonVAT" ng-model="vm.nonVAT"
+                                           ng-checked="vm.calVAT()">
+                                    <span></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h4>@L("Timesheet")</h4>
+                <table id="datatable1" class="table table-striped table-bordered table-hover table-checkable dataTable no-footer" cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+                            <th class="text-center"></th>
+                            <th class="text-center">@L("Timesheet")</th>
+                            <th class="text-center">@L("Fee")</th>
+                            <th class="text-center">@L("Expenses")</th>
+                            <th class="text-center">@L("VAT")</th>
+                            <th class="text-center">@L("Total")</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="x in vm.listTimesheets">
+                            <td class="bs-checkbox">
+                                <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
+                                    <input name="btSelectItem" type="checkbox" value={{x.id}} ng-click="vm.selectTimesheet(x)"><span></span>
+                                </label>
+                            </td>
+                            <td>{{x.timeSheetName}}</td>
+                            <td class="text-center">{{x.proFeeGrandAMT | number:0}}</td>
+                            <td class="text-right">{{x.expenseAMT | number:0}}</td>
+                            <td class="text-right">{{x.taxAMT | number:0}}</td>
+                            <td class="text-right">{{x.grandAMT | number:0}}</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr ng-show="vm.listTimesheets.length == 0">
+                            <td colspan="15">There is no timesheet available to invoice</td>
+                        </tr>
+                    </tfoot>
+                </table>
+                <h4>@L("InterimInvoices")</h4>
+                <table id="datatable2" class="table table-striped table-bordered table-hover table-checkable dataTable no-footer" cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+                            <th class="text-center"></th>
+                            <th class="text-center">@L("InvoiceNo")</th>
+                            <th class="text-center">@L("Date")</th>
+                            <th class="text-center">@L("Total")</th>
+                            <th class="text-center">@L("Remark")</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="x in vm.listInvoices">
+                            <td class="bs-checkbox">
+                                <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
+                                    <input name="btSelectItem" type="checkbox" value={{x.id}} ng-click="vm.selectInvoice(x)"><span></span>
+                                </label>
+                            </td>
+                            <td class="text-center">{{x.invoiceCode}}</td>
+                            <td class="text-center">{{x.invoiceDate | date:'dd-MM-yyyy'}}</td>
+                            <td class="text-right">{{x.totalAMT | number:0}}</td>
+                            <td class="text-center"><span>Inclusive of VAT</span></td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr ng-show="vm.listInvoices.length == 0">
+                            <td colspan="15">@L("NoRecords")</td>
+                        </tr>
+                    </tfoot>
+                </table>
+                <div class="row">
+                    <div class="form-group col-md-offset-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-6 text-right">
+                                @L("TotalInterimInvoices")
+                            </label>
+                            <div class="form-group col-md-6">
+                                <input disabled type="text" sg-number-input class="form-control text-right" ng-model="vm.totalAdv" id="totalAdv" >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="control-label col-md-5">
+                                @L("TheBalanceOfFinalTimesheet")
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 form-group">
+                        <div class="form-group">
+                            <label class="control-label col-md-5">
+                                @L("RemainingAmount")
+                            </label>
+                            <div class="col-md-7">
+                                <input type="text" class="form-control" disabled id="remain" ng-model="vm.remain" sg-number-input>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 form-group">
+                        <div class="form-group" >
+                            <label class="control-label col-md-5">
+                                @L("NewInvoiceNo")
+                            </label>
+                            <div class="col-md-7">
+                                <input type="text" class="form-control" ng-model="vm.invoiceCode" name="invoiceCode" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 form-group" >
+                        <div class="form-group">
+                            <label class="control-label col-md-5">
+                                @L("NewInvoiceDate")
+                            </label>
+                            <div class="col-md-7">
+                                <input type="text" required class="form-control" ng-model="vm.invoiceDate" name="invoiceDate" id="invoiceDate">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" ng-click="vm.cancel()">@L("Cancel")</button>
+                <button type="submit" class="btn btn-primary blue" ng-click="vm.save()" ng-disabled="vm.saving || form.invoiceCode.$invalid || vm.selectedTimesheets.length == 0"><i class="fa fa-save"></i> <span>@L("Save")</span></button>
+          
+            </div>
+        </form>
+    </div>

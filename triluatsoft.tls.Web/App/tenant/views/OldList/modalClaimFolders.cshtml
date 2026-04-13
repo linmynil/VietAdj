@@ -1,0 +1,63 @@
+﻿<div>
+    <form name="form" role="form" class="form-validation">
+        <div class="panel-group">
+            <div class="modal-header">
+                <h4 class="modal-title">@L("ClaimFolders")</h4>
+            </div>
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-md-10">
+                        <div class="form-group">
+                            <label class="control-label col-md-12">C:\vietadjuster\CMCLAIMDOCS\{{vm.item.data}}</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-10">
+                        <div class="form-group">
+                            <label class="control-label col-md-8">
+                                <button type="submit" class="btn btn-primary blue" ng-click="vm.openModalClaimFolderFile()"><span>@L("ClaimFolderList")</span></button>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-10">
+                        <div class="form-group">
+                            <label class="control-label col-md-12">Unable to find 'C:\vietadjuster\CMCLAIMDOCS\{{vm.item.data}}'</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-10">
+                        <div class="form-group">
+                            <label class="control-label col-md-12">Please Refresh or check if folder is existed?.</label>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            </div>
+
+            <div class="modal-footer">
+                <button ng-disabled="vm.saving" type="button" class="btn btn-default" ng-click="vm.cancel()">@L("Cancel")</button>
+            </div>
+        </form>
+    </div>
+<script>
+$(function() {
+  $('input[name="datetimes"]').daterangepicker({
+      singleDatePicker: true,
+      timePicker : true,
+      timePicker24Hour : true,
+      autoApply : true,
+      startDate: moment().startOf('hour'),
+      endDate: moment().startOf('hour').add(32, 'hour'),
+      locale: {
+         format: 'DD/MM/YYYY HH:mm'
+    }
+  });
+});
+</script>

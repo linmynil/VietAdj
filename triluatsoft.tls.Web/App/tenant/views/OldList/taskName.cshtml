@@ -1,0 +1,49 @@
+<div ng-controller="tenant.views.OldList.taskName as vm">
+    <div class="row margin-bottom-5">
+        <div class="col-xs-6">
+            <div class="page-head">
+                <div class="page-title">
+                    <h1>
+                        <span>@L("ManageTaskName")</span>
+                    </h1>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-6 text-right">
+            <button class="btn btn-primary blue" ng-click="vm.openModal()"><i class="fa fa-plus"></i>@L("Create")</button>
+        </div>
+    </div>
+    <div class="portlet light margin-bottom-0">
+        <div class="portlet-body">
+
+            <table class="table table-striped table-bordered table-hover no-footer" busy-if="vm.loading" data-click-to-select="true">
+                <thead role="row">
+                    <tr>
+                        <th class="text-center">@L("JobCode")</th>
+                        <th class="text-center">@L("TaskName")</th>
+                        <th class="text-center">@L("StandardTime")</th>
+                        <th class="text-center"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="cause in vm.list">
+                        <td class="text-center">{{cause.jobCode}}</td>
+                        <td class="text-left">{{cause.name}}</td>
+                        <td class="text-right">{{cause.standardTime | number: 2}}</td>
+                        <td class="text-center col-md-2">
+                            <button ng-click="vm.delete(cause)" title="@L("Delete")" class="btn btn-circle btn-icon-only red delete-person" href="javascript:;">
+                                <i class="icon-trash"></i>
+                            </button>
+                            <button ng-click="vm.openModal(cause)" title="@L("Edit")" class="btn btn-circle btn-icon-only blue" href="javascript:;">
+                                <i class="icon-pencil"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr ng-show="vm.causes.length == 0">
+                        <td colspan="15">@L("NoRecords")</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

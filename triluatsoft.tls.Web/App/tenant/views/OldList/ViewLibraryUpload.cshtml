@@ -1,0 +1,121 @@
+﻿<div ng-controller="tenant.views.OldList.ViewLibraryUpload as vm">
+    <div class="row margin-bottom-5">
+        <div class="col-xs-6">
+            <div class="page-head">
+                <div class="page-title">
+                    <h1>
+                        <span>@L("Upload")</span>
+                    </h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="portlet light margin-bottom-0">
+        <div class="portlet-body">
+            <form action="#" class="form-horizontal form-row-sepe ng-pristine ng-valid" busy-if="vm.loadingDate">
+                <div class="form-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="col-md-3 control-label"></label>
+                            <div class="row" style="padding-bottom:10px;">
+                                <span class="btn green fileinput-button">
+                                    <i class="fa fa-plus"></i>
+                                    <span>
+                                        @L("UploadFile")
+                                    </span>
+                                    <input type="file" nv-file-select multiple uploader="vm.fileContractUploader">
+                                    @*<input type="file" nv-file-select uploader="vm.uploader" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" class="form-control" />*@
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    @L("Search")
+                                </label>
+                                <div class="col-md-4">
+                                    <input type="text" class="form-control input-large" ng-model="vm.searchdata.content" />
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+             
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group" style="margin-bottom:0px">
+                                <label class="col-md-3 control-label">@L("Category")</label>
+                                <div class="col-md-4">
+                                    <select class="form-control input-large"
+                                            ng-model="vm.searchdata.category">
+                                        <option selected value="E">E-Book</option>
+                                        <option value="D">LEGAL DOCUMENT</option>
+                                        <option value="H">CLAIMS HANDING PROCEDURES</option>
+                                        <option value="C">CORPORATE IDENTITY</option>
+                                        <option value="S">SUPPLIERS – MARKET PRICE</option>
+                                        <option value="L">ISSUED LETTERS</option>
+                                        <option value="P">INSURANCE POLICIES</option>
+                                        <option value="I">INDUCTION PROGRAME</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="text-center">
+                                <button type="submit" ng-disabled="vm.loading" class="btn btn-primary blue" ng-click="vm.searchLogs($event)">
+                                    @L("Upload")
+                                </button>
+                                <button type="submit" ng-disabled="vm.loading" class="btn btn-primary blue" ng-click="vm.searchLogs($event)">
+                                    @L("Search")
+                                </button>
+                                <button type="submit" ng-disabled="vm.loading" class="btn btn-primary blue" ng-click="vm.getAll()">
+                                    @L("All")
+                                </button>
+                            </div>
+                        </div>
+                        </div>
+
+                    </div>
+
+                <div class="form-actions">
+                    <div class="row">
+                        
+                    </div>
+                </div>
+            </form>
+            <br />
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="panel-title">@L("FileUpload")</div>
+                </div>
+                <table class="table table-striped table-bordered table-hover no-footer" busy-if="vm.loading" data-click-to-select="true">
+                    <thead role="row">
+                        <tr>
+                            <th class="text-center">@L("FileName")</th>
+                            <th class="text-center">@L("Download")</th>
+                            <th class="text-center">@L("Delete")</th>
+                        </tr>
+                        <tr ng-repeat="item in vm.fileList.slice(((vm.currentPage-1)*vm.itemsPerPage), ((vm.currentPage)*vm.itemsPerPage))">
+                            <td class="text-left">{{item.fName}}</td>
+                            <td class="text-center"><span ng-click="vm.download(item.fName, $event)"><a href="">Download</a></span></td>                            
+                            <td class="text-center">                                
+                                <button ng-click="vm.deleteUpload(item)" title="@L("Delete")" class="btn btn-circle btn-icon-only red delete-person" href="javascript:;" style="margin-right:0px;margin-left:0px">
+                                    <i class="icon-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" class="text-center">
+                                <ul uib-pagination total-items="vm.totalItems" ng-model="vm.currentPage" max-size="vm.maxSize" class="pagination-sm pagination" boundary-links="true" force-ellipses="true" items-per-page="vm.itemsPerPage"></ul>
+                            </td>
+                        </tr>
+                        <tr ng-show="vm.fileList.length == 0">
+                            <td colspan="7">@L("NoRecords")</td>
+                        </tr>                        
+                    </thead>
+
+                </table>
+            </div>                       
+        </div>
+    </div>
+</div>

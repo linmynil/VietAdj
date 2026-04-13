@@ -1,0 +1,183 @@
+﻿<div ng-controller="tenant.views.OldList.ViewLibraryDownload as vm">
+    <div class="row margin-bottom-5">
+        <div class="col-xs-6">
+            <div class="page-head">
+                <div class="page-title">
+                    <h1>
+                        <span>@L("Download")</span>
+                    </h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="portlet light margin-bottom-0">
+        <div class="portlet-body">
+            <form action="#" class="form-horizontal form-row-sepe ng-pristine ng-valid" busy-if="vm.loadingDate">
+                <div class="form-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    @L("Search")
+                                </label>
+                                <div class="col-md-4">
+                                    <input type="text" class="form-control input-large" />
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group" style="margin-bottom:0px">
+                                <label class="col-md-3 control-label">@L("Category")</label>
+                                <div class="col-md-4">
+                                    <select class="form-control input-large"
+                                            ng-model="vm.searchdata.refStatusId">
+                                        <option selected="selected" value="">E-Book</option>
+                                        <option value="2">LEGAL DOCUMENT</option>
+                                        <option value="3">CLAIMS HANDING PROCEDURES</option>
+                                        <option value="4">CORPORATE IDENTITY</option>
+                                        <option value="5">SUPPLIERS – MARKET PRICE</option>
+                                        <option value="6">ISSUED LETTERS</option>
+                                        <option value="7">INSURANCE POLICIES</option>
+                                        <option value="8">INDUCTION PROGRAME</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+             
+                    <div class="row">
+                        
+                        <div class="col-md-12">
+                            <div class="text-center">
+                                <button type="submit" ng-disabled="vm.loading" class="btn btn-primary blue" ng-click="vm.searchLogs()">
+                                    @L("Search")
+                                </button>
+                                <button type="submit" ng-disabled="vm.loading" class="btn btn-primary blue" ng-click="vm.searchLogs()">
+                                    @L("All")
+                                </button>
+                            </div>
+                        </div>
+                        </div>
+
+                    </div>
+
+                <div class="form-actions">
+                    <div class="row">
+                        
+                    </div>
+                </div>
+            </form>
+            <br />
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="panel-title">@L("Result")</div>
+                </div>
+                <table class="table table-striped table-bordered table-hover no-footer" busy-if="vm.loading" data-click-to-select="true">
+                    <thead role="row">
+                        <tr>
+                            <th class="text-center">@L("FileName")</th>
+                            <th class="text-center">@L("Download")</th>
+                        </tr>
+                        <tr>
+                            <td class="text-left">REMOVAL OF DEBRIS.pdf</td>
+                            <td class="text-center">
+                                <button ng-click="vm.deleteDownload()" title="Download" class="btn btn-circle btn-icon-only blue" href="javascript:;" style="margin-right:0px;margin-left:0px">
+                                    <i class="glyphicon glyphicon-download-alt"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left">CAC DINH NGHIA VE CAC LOAI THIEN TAI PHO BIEN.pdf</td>
+                            <td class="text-center">
+                                <button ng-click="vm.deleteDownload()" title="Download" class="btn btn-circle btn-icon-only blue" href="javascript:;" style="margin-right:0px;margin-left:0px">
+                                    <i class="glyphicon glyphicon-download-alt"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left">DINH NGHIA MMTB.pdf</td>
+                            <td class="text-center">
+                                <button ng-click="vm.deleteDownload()" title="Download" class="btn btn-circle btn-icon-only blue" href="javascript:;" style="margin-right:0px;margin-left:0px">
+                                    <i class="glyphicon glyphicon-download-alt"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left">IMDEMNITY VALUE.pdf</td>
+                            <td class="text-center">
+                                <button ng-click="vm.deleteDownload()" title="Download" class="btn btn-circle btn-icon-only blue" href="javascript:;" style="margin-right:0px;margin-left:0px">
+                                    <i class="glyphicon glyphicon-download-alt"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left">INTERPRETATION IN DETAIL OF EXCLUSION NO 7 UNDER STANDARD FIRE AND SPECIAL PERILS POLICY.pdf</td>
+                            <td class="text-center">
+                                <button ng-click="vm.deleteDownload()" title="Download" class="btn btn-circle btn-icon-only blue" href="javascript:;" style="margin-right:0px;margin-left:0px">
+                                    <i class="glyphicon glyphicon-download-alt"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left">REMOVAL OF DEBRIS (ENG).doc</td>
+                            <td class="text-center">
+                                <button ng-click="vm.deleteDownload()" title="Download" class="btn btn-circle btn-icon-only blue" href="javascript:;" style="margin-right:0px;margin-left:0px">
+                                    <i class="glyphicon glyphicon-download-alt"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left">REMOVAL OF DEBRIS _ENG_.pdf</td>
+                            <td class="text-center">
+                                <button ng-click="vm.deleteDownload()" title="Download" class="btn btn-circle btn-icon-only blue" href="javascript:;" style="margin-right:0px;margin-left:0px">
+                                    <i class="glyphicon glyphicon-download-alt"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left">REMOVAL OF DEBRIS.doc</td>
+                            <td class="text-center">
+                                <button ng-click="vm.deleteDownload()" title="Delete" class="btn btn-circle btn-icon-only blue" href="javascript:;" style="margin-right:0px;margin-left:0px">
+                                    <i class="glyphicon glyphicon-download-alt"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left">Adjustment of Public Liability Claims.pdf</td>
+                            <td class="text-center">
+                                <button ng-click="vm.deleteDownload()" title="Delete" class="btn btn-circle btn-icon-only blue" href="javascript:;" style="margin-right:0px;margin-left:0px">
+                                    <i class="glyphicon glyphicon-download-alt"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left">6Directive_1977-388-CEE-en.pdf</td>
+                            <td class="text-center">
+                                <button ng-click="vm.deleteDownload()" title="Delete" class="btn btn-circle btn-icon-only blue" href="javascript:;" style="margin-right:0px;margin-left:0px">
+                                    <i class="glyphicon glyphicon-download-alt"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left">23_2008_QH12_LAW ON ROAD TRAFFIC.doc</td>
+                            <td class="text-center">
+                                <button ng-click="vm.deleteDownload()" title="Delete" class="btn btn-circle btn-icon-only blue" href="javascript:;" style="margin-right:0px;margin-left:0px">
+                                    <i class="glyphicon glyphicon-download-alt"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </thead>
+
+                </table>
+            </div>
+            </div>
+           
+            <div class="row">
+                <div class="col-md-7">
+                    <ul boundary-link-numbers="true" class="margin-top-0" uib-pagination total-items="vm.totalCount" items-per-page="20" ng-model="vm.page" ng-change="vm.pageChanged()" max-size="5"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

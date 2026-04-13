@@ -1,0 +1,102 @@
+﻿<div>
+    <form name="form" role="form" class="form-validation" id="form">
+        <div class="panel-group">
+            <div class="modal-header">
+                <button type="button" class="close" ng-click="vm.cancel()">&times;</button>
+                <h4 class="modal-title">
+                    <span ng-if="vm.id">@L("Edit")</span>
+                    <span ng-if="!vm.id">@L("AddNew")</span>
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="row" style="margin-bottom:5px">
+                    <div class="col-md-6">
+                        <div class="form-group"  ng-class="{ 'has-error' : form.createdDate.$invalid}">
+                            <label class="control-label col-md-4" style="width:150px">
+                                @L("Date")
+                            </label>
+                            <div class="col-md-4">
+                                <input type="text" name="createdDate" id="createdDate" class="form-control input-large" ng-model="vm.createdDate" required >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-bottom:5px">
+                    <div class="col-md-6">
+                        <div class="form-group"  ng-class="{ 'has-error' : form.description.$invalid}">
+                            <label class="control-label col-md-4" style="width:150px">
+                                @L("Description")
+                            </label>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control input-large" maxlength="100" required
+                                       name="description" ng-model="vm.item.description">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-bottom:5px">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-4" style="width:150px">
+                                @L("ReferenceNo")
+                            </label>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control input-large" maxlength="50"
+                                       ng-model="vm.item.refNbr">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-bottom:5px">
+                    <div class="col-md-6">
+                        <div class="form-group" ng-class="{ 'has-error' : form.payment.$invalid}" >
+                            <label class="control-label col-md-4" style="width:150px">
+                                @L("PaymentMethod")
+                            </label>
+                            <div class="col-md-4">
+                                <select class="form-control input-large" ng-model="vm.item.payment" name="payment" required>
+                                    <option value="C" selected="selected">Cash</option>
+                                    <option value="B">TT</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-bottom:5px">
+                    <div class="col-md-6">
+                        <div class="form-group" ng-class="{ 'has-error' : form.voucherType.$invalid}" >
+                            <label class="control-label col-md-4" style="width:150px">
+                                @L("ReceiptPayment")
+                            </label>
+                            <div class="col-md-4">
+                                <select class="form-control input-large" ng-model="vm.item.voucherType" name="voucherType" required ng-init="vm.item.voucherType='P'">
+                                    <option value="P">Payment</option>
+                                    <option value="R">Receipt</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-bottom:5px">
+                    <div class="col-md-6">
+                        <div class="form-group" ng-class="{ 'has-error' : form.amount.$invalid}">
+                            <label class="control-label col-md-4" style="width:150px">
+                                @L("Amount")
+                            </label>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control input-large text-right" required sg-number-input 
+                                       name="amount" ng-model="vm.item.amount" maxlength="18">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" ng-click="vm.cancel()">@L("Cancel")</button>
+                <button type="submit" ng-disabled="vm.saving || form.$invalid" class="btn btn-primary blue" ng-click="vm.save()"><i class="fa fa-save"></i> <span>@L("Save")</span></button>
+          
+            </div>
+        </form>
+    </div>

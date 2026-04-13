@@ -1,0 +1,122 @@
+<div ng-controller="tenant.views.OldList.customer as vm">
+    <div class="row margin-bottom-5">
+        <div class="col-xs-6">
+            <div class="page-head">
+                <div class="page-title">
+                    <h1>
+                        <span>@L("Customers")</span>
+                    </h1>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-6 text-right">
+            <button class="btn btn-primary blue" ng-click="vm.openModal()"><i class="fa fa-plus"></i>@L("Create")</button>
+        </div>
+    </div>
+    <div class="portlet light margin-bottom-0">
+        <div class="portlet-body">
+            <form action="#" class="form-horizontal form-row-sepe ng-pristine ng-valid" id="resetme">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-3">
+                                @L("Name")
+                            </label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control input-large" ng-model="vm.searchdata.name" maxlength="100">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-3">
+                                @L("Abbreviation")
+                            </label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control input-large" ng-model="vm.searchdata.brandName" maxlength="100">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-3">
+                                @L("RecordType")
+                            </label>
+                            <div class="col-md-4">
+                                <select class="form-control input-large" name="recordType"
+                                        ng-model="vm.searchdata.recordType">
+                                    <option value="" selected>All</option>
+                                    <option value="C">Insurers</option>
+                                    <option value="B">Brokers</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3">
+                                @L("Status")
+                            </label>
+                            <div class="col-md-4">
+                                <select class="form-control input-large" name="status"
+                                        ng-model="vm.searchdata.status">
+                                    <option value="" selected>All</option>
+                                    <option value="true">Active</option>
+                                    <option value="false">Deactive</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div> @*end div row*@
+                <div class="form-actions">
+                    <div class="row">
+                        <div class="col-md-offset-5 col-md-9">
+                            <button type="submit" ng-disabled="vm.loading" class="btn btn-primary blue" ng-click="vm.searchLog($event)">
+                                @L("Search")
+                            </button>
+                            <button type="reset" class="btn btn-primary blue" ng-click="vm.reset()">
+                                @L("Reset")
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <br />
+                <table class="table table-striped table-bordered table-hover no-footer" busy-if="vm.loading" data-click-to-select="true">
+                    <thead role="row">
+                        <tr>
+                            <th class="text-center" style="width:35%">@L("Name")</th>
+                            <th class="text-center" style="width:15%">@L("Abbreviation")</th>
+                            <th class="text-center">@L("ContactName")</th>
+                            <th class="text-center" style="width:5%">@L("Active")</th>
+                            <th class="text-center" style="width:5%">@L("Type")</th>
+                            <th class="text-center col-md-2" ></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="cause in vm.list">
+                            <td class="text-left">{{cause.name}}</td>
+                            <td class="text-left">{{cause.brandName}}</td>
+                            <td class="text-left">{{cause.contactName}}</td>
+                            <td class="text-center text-capitalize">{{cause.isActive}}</td>
+                            <td class="text-center">{{cause.recordType=='C'?'Insurer':(cause.recordType=='B'?'Broker':'')}}</td>
+                            <td class="text-center">
+                                <button ng-click="vm.openModal(cause, 'view')" title="@L("View")" class="btn btn-circle btn-icon-only blue" href="javascript:;">
+                                    <i class="icon-info"></i>
+                                </button>
+                                <button ng-click="vm.openModal(cause, 'edit')" title="@L("Edit")" class="btn btn-circle btn-icon-only blue" href="javascript:;">
+                                    <i class="icon-pencil"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr ng-show="vm.causes.length == 0">
+                            <td colspan="15">@L("NoRecords")</td>
+                        </tr>
+                    </tbody>
+                </table>
+</div>
+    </div>
+</div>

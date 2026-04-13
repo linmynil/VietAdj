@@ -1,0 +1,91 @@
+<div ng-controller="tenant.views.OldList.viewCRS as vm">
+    <div class="row margin-bottom-5">
+        <div class="col-xs-6">
+            <div class="page-head">
+                <div class="page-title">
+                    <h1>
+                        <span>@L("UserContribution")</span>
+                    </h1>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="portlet light margin-bottom-0">
+        <div class="portlet-body">
+            <form name="report" action="#" class="form-horizontal form-row-sepe ng-pristine ng-valid" busy-if="vm.loadingDate">
+                <div class="form-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group" ng-class="{ 'has-error' : report.daterange.$invalid}">
+                                <label class="control-label col-md-4">
+                                    @L("DateRange")
+                                </label>
+                                <div class="col-md-8">
+                                    <input date-range-picker type="text" required name="daterange"
+                                           options="vm.dateRangeOptions" min="vm.dateRangeOptions.min" max="vm.dateRangeOptions.max"
+                                           class="form-control date-picker input-large" ng-model="vm.dateRangeModel" />     
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    @L("Employee")
+                                </label>
+                                <div class="col-md-7">
+                                    <select class="form-control" ng-model="vm.searchdata.employeeID" ng-options="opt.employeeId as opt.name for opt in vm.listEmps">
+                                        <!--<option selected value="">All</option>-->
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <div class="row">
+                        <div class="col-md-offset-5">
+                            <button type="submit" class="btn btn-primary blue" ng-disabled="report.$invalid"
+                                    ng-click="vm.viewContributionR($event)">
+                                @L("ViewReport")
+                            </button>
+                            <button type="submit" class="btn btn-primary blue" ng-show="!vm.excel" ng-click="vm.exportExcel($event)">
+                            @L("ExportExcel")
+                        </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <br />
+            <table busy-if="vm.contributionLoading" class="table table-striped table-bordered table-hover table-checkable dataTable no-footer" cellspacing="0" ng-hide=vm.hide>
+                <thead role="row">
+                    <tr>
+                        <th class="text-center">No.</th>
+                        <th class="text-center">Employee</th>
+                        <th class="text-center">Contribution</th>
+                        <th class="text-center">@L("IncomeCRS")</th>
+                        <th class="text-center">Balance</th>
+                        <th class="text-center">Result</th>                        
+                    </tr>
+                </thead>
+                <tr ng-repeat="item in vm.listContribution">
+                    <td class="text-right">{{item.ord}}</td>
+                    <td class="text-left">{{item.empName}}</td>
+                    <td class="text-right">{{item.conAMT | number: 0}}</td>
+                    <td class="text-right">{{item.incomAMT | number: 0}}</td>
+                    <td class="text-right">{{item.balamt | number: 0}}</td>
+                    <td class="text-center">{{item.audit}}</td>
+                </tr>
+                <tr ng-show="vm.listContribution.length == 0">
+                    <td colspan="15">@L("NoRecords")</td>
+                </tr>
+            </table>
+            <div class="row">
+                <div class="col-md-7">
+                    <ul boundary-link-numbers="true" class="margin-top-0" uib-pagination total-items="vm.totalCount" items-per-page="20" ng-model="vm.page" ng-change="vm.pageChanged()" max-size="5"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

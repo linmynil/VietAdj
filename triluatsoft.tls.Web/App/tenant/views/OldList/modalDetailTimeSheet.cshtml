@@ -1,0 +1,145 @@
+﻿<div>
+    <form name="form" role="form" class="form-validation">
+        <div class="panel-group">
+            <div class="modal-header">
+                <button type="button" class="close" ng-click="vm.cancel()">&times;</button>
+                <h3 style="color:#0285bd">@L("TimeSheetViewInfo") {{vm.timesheet.timeSheetName}}</h3>
+            </div>
+            <div class="modal-body">
+                <button type="submit" class="btn btn-primary blue" ng-click="vm.openModalCreateInvoice(vm.timesheet.claimID)" style="margin-top:10px;margin-left:3px;margin-right:3px"><span>@L("Invoice")</span></button>
+
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-4" style="padding-top:0">@L("ExchangeRateUSDVND")</label>
+                            <input class="form-control input-small" type="text" ng-model="vm.timesheet.exchangeRate" readonly>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-4" style="padding-top:0">@L("DiscountValue")</label>
+                            <div class="col-md-8 input-group">
+                                <input class="form-control col-md-9 input-small text-right" readonly style="width:auto" type="number" name="est" ng-model="vm.timesheet.discountVal" step="0.01">
+                                <div class="input-group-append col-md-2">
+                                    <button id="ExpButton" type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown">
+                                        Percent <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-menu-right" ng-model="vm.timesheet.discountType">
+                                        <li><a href="#" ng-click="vm.setExpType('P');">Percent</a></li>
+                                        <li><a href="#" ng-click="vm.setExpType('A');">Amount</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h4 style="color:#0285bd">@L("TimesheetSummary")</h4>
+                <table id="datatable" class="table table-striped table-bordered table-hover table-checkable dataTable no-footer" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th class="text-center">@L("ID")</th>
+                            <th class="text-center">@L("ClaimRef")</th>
+                            <th class="text-center">@L("Issue")</th>
+                            <th class="text-center">@L("Invoice")</th>
+                            <th class="text-center">@L("ActualFee")</th>
+                            <th class="text-center">@L("IncurredFee")</th>
+                            <th class="text-center">@L("Discount")</th>
+                            <th class="text-center">@L("Fee")</th>
+                            <th class="text-center">@L("Expenses")</th>
+                            <th class="text-center">@L("VAT")</th>
+                            <th class="text-center">@L("Total")</th>
+                        </tr>
+                        <tr @*ng-repeat="cause in vm.list"*@>
+                            <td class="text-right">{{vm.timesheet.timeSheetID}}</td>
+                            <td class="text-left">{{vm.timesheet.claimID}}</td>
+                            <td class="text-center"><i class="fa fa-2x" ng-class="vm.itemsheet.isIssued?'fa-check text-success':'fa-ban text-danger'"></i></td>
+                            <td class="text-right">{{vm.timesheet.invoiceCode}}</td>
+                            <td class="text-right">{{vm.timesheet.actualFeeVND | number:0}}</td>
+                            <td class="text-right">{{vm.timesheet.proFeeAMTVND | number:0}}</td>
+                            <td class="text-right">{{vm.timesheet.discountAMT | number:0}}</td>
+                            <td class="text-right">{{vm.timesheet.proFeeGrandAMT | number:0}}</td>
+                            <td class="text-right">{{vm.timesheet.expenseAMT | number:0}}</td>
+                            <td class="text-right">{{vm.timesheet.taxAMT | number:0}}</td>
+                            <td class="text-right">{{vm.timesheet.grandAMT | number:0}}</td>
+                        </tr>
+
+
+                    </thead>
+                </table>
+                <hr />
+                <div class="modal-body">
+                    <uib-tabset class="tab-container tabbable-line">
+                        <uib-tab heading="@L("IncurredFee")">
+                            <table id="datatable" class="table table-striped table-bordered table-hover table-checkable dataTable no-footer" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center col-md-2">@L("Date")</th>
+                                        <th class="text-center col-md-2">@L("LossAdjusters")</th>
+                                        <th class="text-center">@L("Description")</th>
+                                        <th class="text-center">@L("RateUSD")</th>
+                                        <th class="text-center">@L("StandardTime")</th>
+                                        <th class="text-center">@L("ActualTime")</th>
+                                        <th class="text-center">@L("ApprovedTime")</th>
+                                        <th class="text-center">@L("IncurredFeeUSD")</th>
+                                    </tr>
+                                    </thead>
+                                    <tr ng-repeat="fee in vm.timesheet.listProFee">
+
+                                        <td class="text-center">{{fee.inputDate | date:'dd-MM-yyyy'}}</td>
+                                        <td class="text-left">{{fee.chargedByName}}</td>
+                                        <td class="text-left">{{fee.notes}}</td>
+                                        <td class="text-right">{{fee.chargedFeePerHour}}</td>
+                                        <td class="text-right">{{fee.standardTime | number: 1}}</td>
+                                        <td class="text-right">{{fee.workTimeStr}}</td>
+                                        <td class="text-right">{{fee.approveTimeStr}}</td>
+                                        <td class="text-right">{{fee.chargedProFeeValue | number:0}}</td>
+                                    </tr>
+
+                                <tfoot>
+                                    <tr ng-show="vm.timesheet.listProFee.length == 0">
+                                        <td colspan="15">@L("NoRecords")</td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </uib-tab>
+                        <uib-tab>
+                            <uib-tab-heading>
+                                @L("Expenses") <b class="badge badge-primary"></b>
+                            </uib-tab-heading>
+                            <table id="datatable" class="table table-striped table-bordered table-hover table-checkable dataTable no-footer" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center col-md-2">@L("Date")</th>
+                                        <th class="text-center">@L("Description")</th>
+                                        <th class="text-center">@L("TypeOfExpenses")</th>
+                                        <th class="text-center">@L("Amount")</th>
+                                    </tr>
+                                    </thead>
+                                    <tr ng-repeat="exp in vm.timesheet.listExpense" *@>
+                                        <td class="text-center">{{exp.inputDate | date:'dd-MM-yyyy'}}</td>
+                                        <td class="text-left">{{exp.description}}</td>
+                                        <td class="text-left">{{exp.expenseTypeName}}</td>
+                                        <td class="text-right">{{exp.amount | number:0}}</td>
+                                    </tr>
+
+                                <tfoot>
+                                    <tr ng-show="vm.timesheet.listExpense.length == 0">
+                                        <td colspan="15">@L("NoRecords")</td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </uib-tab>
+                    </uib-tabset>
+                </div>
+
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" ng-click="vm.cancel()">@L("Close")</button>
+            </div>
+        </div>
+    </form>
+</div>

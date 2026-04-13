@@ -1,0 +1,85 @@
+﻿<div>
+    <form name="expenseForm" role="form" class="form-validation">
+        <div class="panel-group">
+            <div class="modal-header">
+                <button type="button" class="close" ng-click="vm.cancel()">&times;</button>
+                <h4 class="modal-title">
+                    <span ng-if="vm.item.expenseID">@L("EditExpenses")</span>
+                    <span ng-if="!vm.item.expenseID">@L("AddExpenses")</span>
+                </h4>
+            </div>
+            <div class="modal-body">
+
+                <div class="row" style="margin-bottom:5px">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-4" style="width:150px">
+                                @L("Timesheet")
+                            </label>
+                            <div class="col-md-4">
+                                <label>{{vm.timesheetName}}</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-bottom:5px">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-4" style="width:150px">
+                                @L("Date")
+                            </label>
+                            <div class="col-md-4">
+                                <input type="text" name="inputDate" id="date" class="form-control input-large" ng-model="vm.item.inputDate">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-bottom:5px">
+                    <div class="col-md-6">
+                        <div class="form-group" ng-class="{ 'has-error' : expenseForm.expenseType.$invalid}">
+                            <label class="control-label col-md-4" style="width:150px">
+                                @L("ExpenseType")
+                            </label>
+                            <div class="col-md-4">
+                                <select class="form-control input-large" ng-model="vm.item.expenseTypeID" name="expenseType" ng-options="opt.id as opt.name for opt in vm.listTypes" required ng-change="vm.selectType()"></select>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-bottom:5px">
+                    <div class="col-md-6">
+                        <div class="form-group" ng-class="{ 'has-error' : expenseForm.expAmount.$invalid}">
+                            <label class="control-label col-md-4" style="width:150px">
+                                @L("Amount")
+                            </label>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control input-large text-right" required sg-number-input
+                                       ng-model="vm.item.amount" name="expAmount" maxlength="18">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-bottom:5px">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-4" style="width:150px">
+                                @L("Description")
+                            </label>
+                            <div class="col-md-4">
+                                <textarea class="form-control" ng-model="vm.item.description" name="expDescription" style="width:320px"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <button ng-disabled="vm.saving" type="button" class="btn btn-default" ng-click="vm.cancel()">@L("Cancel")</button>
+            <button type="submit" class="btn btn-primary blue" ng-click="vm.save()" ng-disabled="vm.saving || expenseForm.$invalid"><i class="fa fa-save"></i> <span>@L("Save")</span></button>
+
+        </div>
+    </form>
+</div>

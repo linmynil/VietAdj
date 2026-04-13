@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Messages>
+  <!--Common Messages-->
+  <Message ID="ACCESS_DENIED_ERROR"><![CDATA[Access denied.<br />You are not allowed to access this function.]]></Message>
+  <Message ID="PARAMETERS_ERROR"><![CDATA[An error has occurred from the parameters of the page.]]></Message>
+  <Message ID="PROCESSING_ERROR"><![CDATA[An error has occurred in the processing of the page.]]></Message>
+  <Message ID="UNEXPECTED_ERROR"><![CDATA[An unexpected error has occurred.<br />The error has been recorded and will be researched by our technical team.<br />]]></Message>
+  <Message ID="GET_LOST_ERROR"><![CDATA[Get lost? Let's get started by clicking the below button.]]></Message>
+
+  <Message ID="SAVE_FAILED"><![CDATA[Error occurs while processing data. Please try again.]]></Message>
+  <Message ID="SAVED_SUCCESSFULLY_TMPL"><![CDATA[The {0} information has been saved successfully!]]></Message>
+  <Message ID="DELETED_SUCCESSFULLY_TMPL"><![CDATA[The {0} information has been deleted successfully!]]></Message>
+  <Message ID="REQUIRED_FIELD_ERROR_TMPL"><![CDATA[{0} is required.]]></Message>
+  <Message ID="TOTAL_RESULT_MYCLAIM"><![CDATA[About {0} results]]></Message>
+  <!--Security Messages-->
+  <Message ID="NOT_ENOUGH_PRIVILEGE_ERROR"><![CDATA[You do not have enough privilege to access this page.]]></Message>
+  <Message ID="UNABLE_DELETE_GROUP"><![CDATA[Please remove all users associated to the group before deleting it.]]></Message>
+  
+  <!--Claim Messages-->
+  <Message ID="REMOVE_ACCOUNT_MANAGER_FAILED"><![CDATA[<p>Remove failed.</p>The Account Manager is in the remove list. Please unassign and try it again.]]></Message>
+  <Message ID="REMOVE_USER_FAILED"><![CDATA[<p>Remove failed.</p>You can only remove users who have NOT been assigned to any tasks or their tasks were completed.]]></Message>
+  <Message ID="CLAIM_EXISTED"><![CDATA[This claim existed in the system.]]></Message>
+  <Message ID="UPDATE_NOTHING"><![CDATA[There is nothing change. Please change something different.]]></Message>
+  
+  <!--Task Messages-->
+  <Message ID="UNABLE_DELETE_TASK"><![CDATA[Unable to delete this task. It's in progress.]]></Message>
+  <Message ID="START_DATE_GREATER_END_DATE"><![CDATA[Start Date must be equal or less than End Date.]]></Message>
+
+  <!--Cash Messages-->
+  <!--<Message ID="EITHER_DEBIT_CREDIT"><![CDATA[You can only enter amount for either Debit or Credit.]]></Message>
+  <Message ID="DEBIT_CREDIT_REQUIRED"><![CDATA[Please enter amount for either Debit or Credit.]]></Message>
+
+  <Message ID="EITHER_RECEIPT_PAYMENT"><![CDATA[You can only enter amount for either Receipt or Payment.]]></Message>
+  <Message ID="RECEIPT_PAYMENT_REQUIRED"><![CDATA[Please enter amount for either Receipt or Payment.]]></Message>-->
+  
+  <!--Timesheet Messages-->
+  <Message ID="UNABLE_ISSUE_TIMESHEET"><![CDATA[This Timesheet could not be issued. Please complete all tasks and try a gain.]]></Message>
+  <Message ID="ISSUED_TIMESHEET_SUCCESSFULLY"><![CDATA[The Timesheet has been issued successfully.]]></Message>
+  <Message ID="UNSUBMITED_TIMESHEET_SUCCESSFULLY"><![CDATA[The Timesheet has been <b>un-submitted</b> successfully.]]></Message>
+  <Message ID="SUBMITED_TIMESHEET_SUCCESSFULLY"><![CDATA[The Timesheet has been <b>submitted</b> successfully.]]></Message>
+  <Message ID="UNISSUED_TIMESHEET_SUCCESSFULLY"><![CDATA[The Timesheet has been <b>un-issued</b> successfully.]]></Message>
+  
+  <!--Notification Message Templates-->
+  <Message ID="NO_UPDATE_NFT_TMPL"><![CDATA[No update for {0} working days since the last update.]]></Message>
+  <Message ID="ILA_NO_UPDATE_NFT_TMPL"><![CDATA[No update for {0} working days since the issuance date of ILA.]]></Message>
+  <Message ID="PREP_INFO_NFT_TMPL"><![CDATA[Deadline will be on {0}]]></Message>
+  <Message ID="PREP_WARNING_NFT"><![CDATA[Deadline for issuing PRE/INT/FIN was missed.]]></Message>
+
+  <!--Account Messages-->
+  <Message ID="CONFIRM_PASS_NOT_MATCHED"><![CDATA[New Password and Confirm Password are not matched.]]></Message>
+  <Message ID="DEFAULT_PASS_RESERVED"><![CDATA[The new password is reserved by the system. Please select a new one.]]></Message>
+  <Message ID="PASSWORD_CHANGED_SUCCESSFULLY"><![CDATA[Your password has been changed successfully. Please login again.]]></Message>
+  <Message ID="USER_NAMING_ERROR"><![CDATA[Only alpha characters (a-z), digit (0-9) and underscore (_) are allowed to create User Name.]]></Message>
+  <Message ID="USER_NAME_EXISTED"><![CDATA[This User Name existed. Please select a new one.]]></Message>
+  <Message ID="USER_NAME_VALID"><![CDATA[You can use this User Name.]]></Message>
+  
+  <Message ID="STATUS_EXISTED"><![CDATA[This Status existed. Please select a new one.]]></Message>
+
+  <!--Report Messages-->
+  <Message ID="SELECT_FROM_DATE"><![CDATA[Please select a date to view from.]]></Message>
+  <Message ID="FROM_DATE_GREATER_TO_DATE"><![CDATA[From Date must be equal or less than To Date.]]></Message>
+  
+  <Message ID="INVOICE_CREATE_SUCCESSFULLY"><![CDATA[Invoice has been created successfully! ]]></Message>
+  <Message ID="INVOICE_UPDATE_SUCCESSFULLY"><![CDATA[Invoice has been updated successfully! ]]></Message>
+  <Message ID="INVOICE_APPROVE_SUCCESSFULLY"><![CDATA[Invoice has been sent successfully! ]]></Message>
+  
+  <Message ID="PAYMENT_METHOD_CA"><![CDATA[Cash]]></Message>
+  <Message ID="PAYMENT_METHOD_TB"><![CDATA[TT]]></Message>
+  
+</Messages>

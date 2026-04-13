@@ -1,0 +1,91 @@
+<div>
+    <form name="exampleForm" role="form" novalidate class="form-validation">
+        <div class="modal-header">
+            <h4 class="modal-title">
+                <span ng-if="vm.editing">Edit</span>
+                <span ng-if="vm.viewing">View</span>
+                <span ng-if="!vm.item.id">Create</span>
+            </h4>
+        </div>
+        <div class="modal-body">
+            <uib-tabset class="tab-container tabbable-line">
+                <uib-tab heading="Organization">
+                    <div class="form-group form-md-line-input form-md-floating-label no-hint">
+                        <input class="form-control" type="text" name="Name" ng-model="vm.item.name" required maxlength="150" autofocus ng-readonly="vm.viewing">
+                        <label>Name</label>
+                    </div>
+                    <div class="form-group form-md-line-input form-md-floating-label no-hint">
+                        <input class="form-control" type="text" ng-class="{'edited':vm.item.brandName}" ng-model="vm.item.brandName" required maxlength="100" ng-readonly="vm.viewing">
+                        <label>Brand Name</label>
+                    </div>
+                    <div class="form-group form-md-line-input form-md-floating-label no-hint">
+                        <select class="form-control" name="recordType" ng-class="{'edited':vm.item.recordType}" ng-model="vm.item.recordType" ng-readonly="vm.viewing">                            
+                            <option value="C" ng-selected="!vm.item">Insurers</option>
+                            <option value="B">Brokers</option>
+                        </select>                        
+                        <label>Record Type</label>
+                    </div>
+                    <div class="form-group form-md-line-input form-md-floating-label no-hint">
+                        <input class="form-control" type="text" ng-class="{'edited':vm.item.address}" name="Address" ng-model="vm.item.address" required maxlength="100" ng-readonly="vm.viewing">
+                        <label>Address</label>
+                    </div>
+                    <div class="form-group form-md-line-input form-md-floating-label no-hint">
+                        <input class="form-control" type="text" ng-class="{'edited':vm.item.phone}" ng-readonly="vm.viewing" ng-model="vm.item.phone" maxlength="20">
+                        <label>Phone</label>
+                    </div>
+                    <div class="form-group form-md-line-input no-hint">
+                        <input class="form-control" type="text" ng-class="{'edited':vm.item.email}" ng-readonly="vm.viewing" ng-model="vm.item.email" maxlength="100">
+                        <label>Email</label>
+                    </div>
+                    <div class="form-group form-md-line-input form-md-floating-label no-hint">
+                        <input class="form-control" type="text" ng-class="{'edited':vm.item.website}" ng-readonly="vm.viewing" ng-model="vm.item.website" maxlength="100">
+                        <label>Website</label>
+                    </div>
+                </uib-tab>
+                <uib-tab>
+                    <uib-tab-heading>
+                        Contact Information
+                    </uib-tab-heading>
+                    <div class="form-group form-md-line-input form-md-floating-label no-hint">
+                        <input class="form-control" type="text" ng-class="{'edited':vm.item.contactName}" ng-readonly="vm.viewing" ng-model="vm.item.contactName" maxlength="100">
+                        <label>Contact Name</label>
+                    </div>
+                    <div class="form-group form-md-line-input form-md-floating-label no-hint">
+                        <input class="form-control" type="text" ng-class="{'edited':vm.item.contactTitle}" ng-readonly="vm.viewing" ng-model="vm.item.contactTitle" maxlength="100">
+                        <label>Title</label>
+                    </div>
+                    <div class="form-group form-md-line-input form-md-floating-label no-hint">
+                        <input class="form-control" type="text" ng-class="{'edited':vm.item.contactPosition}" ng-readonly="vm.viewing" ng-model="vm.item.contactPosition" maxlength="100">
+                        <label>Position</label>
+                    </div>
+                    <div class="form-group form-md-line-input form-md-floating-label no-hint">
+                        <input class="form-control" type="text"  ng-readonly="vm.viewing" ng-class="{'edited':vm.item.contactAddress}" ng-model="vm.item.contactAddress" maxlength="100">
+                        <label>Address</label>
+                    </div>
+                    <div class="form-group form-md-line-input form-md-floating-label no-hint">
+                        <input class="form-control" type="text" ng-class="{'edited':vm.item.contactPhone}" ng-readonly="vm.viewing" ng-model="vm.item.contactPhone" maxlength="20">
+                        <label>Phone</label>
+                    </div>
+                    <div class="form-group form-md-line-input form-md-floating-label no-hint">
+                        <input class="form-control" type="text" ng-class="{'edited':vm.item.contactEmail}" ng-readonly="vm.viewing" ng-model="vm.item.contactEmail" maxlength="100">
+                        <label>Email</label>
+                    </div>
+                    <div class="md-checkbox">
+                        <input id="IsActive" class="md-check" type="checkbox" name="IsActive" ng-disabled="vm.viewing" ng-model="vm.item.isActive">
+                        <label for="IsActive">
+                            <span class="inc"></span>
+                            <span class="check"></span>
+                            <span class="box"></span>
+                            Active
+                        </label>
+                    </div>
+
+                </uib-tab>
+            </uib-tabset>
+        </div>
+        <div class="modal-footer">
+            <button ng-disabled="vm.saving" type="button" class="btn btn-default" ng-click="vm.cancel()">@L("Cancel")</button>
+            <button ng-hide="vm.viewing" type="submit" button-busy="vm.saving" busy-text="@L("SavingWithThreeDot")" class="btn btn-primary blue" ng-click="vm.save()" ng-disabled="exampleForm.$invalid"><i class="fa fa-save"></i> <span>@L("Save")</span></button>
+        </div>
+    </form>
+</div>

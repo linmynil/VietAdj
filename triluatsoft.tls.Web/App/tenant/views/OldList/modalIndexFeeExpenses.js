@@ -52,7 +52,8 @@
                     backdrop: 'static',
                     resolve: {
                         item: function () {
-                            return vm.item;
+                            //return vm.item;
+                            return angular.copy(itemIn);
                         },
                         recordType: function () {
                             return vm.recordType;

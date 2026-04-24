@@ -39,10 +39,12 @@
             });            
 
             vm.timesheetName = timesheetName;
-            vm.item = {};
-            if (item) {
-                vm.item = item;
-            }
+            //vm.item = {};
+            //if (item) {
+            //    vm.item = item;
+            //}
+            vm.item = item ? angular.copy(item) : {};
+
             vm.item.timeSheetID = timesheetId;
             
             console.log('modal fee item', item);
@@ -87,17 +89,32 @@
             vm.cancel = function () {
                 $uibModalInstance.dismiss();
             };
+            //Old
+            //vm.selectTask = function () {
+            //    console.log('vm.item.jobCodeID', vm.item.jobCodeID);
+            //    var temp = $.grep(vm.listTasks, function (e) { return e.id == vm.item.jobCodeID; })[0];
+            //    console.log('temp', temp);
+            //    if (temp) {
+            //        vm.item.standardTime = temp.standardTime;
+            //        vm.item.notes = temp.name;
+            //    }
+            //    console.log('vm.item.standardTime', vm.item.standardTime);              
+            //}
+            //New
             vm.selectTask = function () {
                 console.log('vm.item.jobCodeID', vm.item.jobCodeID);
-                var temp = $.grep(vm.listTasks, function (e) { return e.id == vm.item.jobCodeID; })[0];
+                var temp = vm.listTasks.find(x => x.id == vm.item.jobCodeID);
                 console.log('temp', temp);
                 if (temp) {
                     vm.item.standardTime = temp.standardTime;
-                    vm.item.notes = temp.name;
+                    if (!vm.item.notes || vm.isAutoFillDescription) {
+                        vm.item.notes = temp.name;
+                        vm.isAutoFillDescription = true;
+                    }
                 }
                 console.log('vm.item.standardTime', vm.item.standardTime);
-                
-            }
+            };
+
             vm.getAll = function () {
                 taskNameService.getAll({})
                     .then(function (result) {

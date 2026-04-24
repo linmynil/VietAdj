@@ -52,6 +52,7 @@
                     backdrop: 'static',
                     resolve: {
                         item: function () {
+                            /* Clone item in modal to avoid data mutation on cancel */
                             //return vm.item;
                             return angular.copy(itemIn);
                         },

@@ -39,6 +39,7 @@
             });            
 
             vm.timesheetName = timesheetName;
+            /* Clone item in modal to avoid data mutation on cancel */
             //vm.item = {};
             //if (item) {
             //    vm.item = item;
@@ -89,7 +90,10 @@
             vm.cancel = function () {
                 $uibModalInstance.dismiss();
             };
-            //Old
+            /* Prevent Description from being overwritten when changing Job Code */
+
+            // Code old
+
             //vm.selectTask = function () {
             //    console.log('vm.item.jobCodeID', vm.item.jobCodeID);
             //    var temp = $.grep(vm.listTasks, function (e) { return e.id == vm.item.jobCodeID; })[0];
@@ -100,7 +104,8 @@
             //    }
             //    console.log('vm.item.standardTime', vm.item.standardTime);              
             //}
-            //New
+
+            //Code new
             vm.selectTask = function () {
                 console.log('vm.item.jobCodeID', vm.item.jobCodeID);
                 var temp = vm.listTasks.find(x => x.id == vm.item.jobCodeID);
